@@ -1,0 +1,110 @@
+[
+    {
+        "model":  "goods.category",
+        "pk":  "1",
+        "fields" : { "name":  "normal",
+        "friendly_name":  "Normal"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "2",
+        "fields" : { "name":  "fire",
+        "friendly_name":  "Fire"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "3",
+        "fields" : { "name":  "water",
+        "friendly_name":  "Water"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "4",
+        "fields" : { "name":  "grass",
+        "friendly_name":  "Grass"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "5",
+        "fields" : { "name":  "electric",
+        "friendly_name":  "Electric"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "6",
+        "fields" : { "name":  "ice",
+        "friendly_name":  "Ice"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "7",
+        "fields" : { "name":  "fighting",
+        "friendly_name":  "Fighting"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "8",
+        "fields" : { "name":  "poison",
+        "friendly_name":  "Poison"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "9",
+        "fields" : { "name":  "ground",
+        "friendly_name":  "Ground"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "10",
+        "fields" : { "name":  "flying",
+        "friendly_name":  "Flying"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "11",
+        "fields" : { "name":  "psychic",
+        "friendly_name":  "Psychic"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "12",
+        "fields" : { "name":  "bug",
+        "friendly_name":  "Bug"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "13",
+        "fields" : { "name":  "rock",
+        "friendly_name":  "Rock"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "14",
+        "fields" : { "name":  "ghost",
+        "friendly_name":  "Ghost"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "15",
+        "fields" : { "name":  "dark",
+        "friendly_name":  "Dark"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "16",
+        "fields" : { "name":  "dragon",
+        "friendly_name":  "Dragon"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "17",
+        "fields" : { "name":  "steel",
+        "friendly_name":  "Steel"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "18",
+        "fields" : { "name":  "fairy",
+        "friendly_name":  "Fairy"
+    }}
+]
