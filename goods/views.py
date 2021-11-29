@@ -5,10 +5,10 @@ from .models import Info
 
 def all_products(request):
 
-    data = Info.objects.all()
+    products = Info.objects.all()
 
     context = {
-        'products': data,
+        'products': products,
     }
 
     return render(request, 'products/products.html', context)
