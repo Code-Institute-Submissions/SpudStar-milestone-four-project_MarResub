@@ -16,6 +16,7 @@
     {% block css %}
     <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
 
     {% block extra_css %}
@@ -35,7 +36,25 @@
     <title>ByteSized Goods {% block subtitle %} {% endblock %}</title>
   </head>
   <body>
-    {% block content %}
-    {% endblock %}
+      <header class="container-fluid fixed-top">
+        <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
+            <div class="row my-auto">
+                <a href="{% url 'home' %}" class="col-12 col-lg-4 text-lg-left">
+                    <h2 class="logo-font text-black ">Bytesized Goods</h2>
+                </a>
+                <div class="col-12 col-lg-4"></div>
+                <a href="{% url 'products' %}" class="col-12 col-lg-4">
+                  <h2 class="logo-font text-black ">Browse All Products</h2>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    <div class = "nav-offset">
+      {% block content %}
+      {% endblock %}
+    </div>
+
   </body>
+    
 </html>
