@@ -1,5 +1,4 @@
 import os
-import dj_database_url
 """
 Django settings for bytesized_goods project.
 
@@ -26,9 +25,8 @@ SECRET_KEY = 'django-insecure-y)x$l1io422tl5tgeu2*f8mo=e4*i8bhsbk9o(fm&v6ffdfc*3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+ 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -71,7 +69,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth', # Used by Allauth
+                'django.contrib.auth.context_processors.auth',  # Used by Allauth
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -156,7 +154,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
