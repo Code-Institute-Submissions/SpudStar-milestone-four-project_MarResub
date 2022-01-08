@@ -36,12 +36,12 @@
     <title>ByteSized Goods {% block subtitle %} {% endblock %}</title>
   </head>
   <body>
-      <header class="container-fluid fixed-top">
-        <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
+      <header id="topnav" class="container-fluid fixed-top">
+        <div class="row pt-lg-2 d-none d-lg-flex">
             <div class="row my-auto">
               <div class="col-12 col-lg-4">
                 <a href="{% url 'home' %}" class="col-12 col-lg-4 text-lg-left">
-                  <h2 class="logo-font text-black ">Bytesized Goods</h2>
+                  <h2 class="logo-font text-black link-remover">Bytesized Goods</h2>
                 </a>
               </div>
               <div class="col-12 col-lg-4">
@@ -60,7 +60,7 @@
               </div>
               <div class="col-12 col-lg-4">
                 <a href="{% url 'products' %}" class="col-12 col-lg-4">
-                  <h2 class="logo-font text-black ">Browse All Products</h2>
+                  <h2 class="logo-font text-black link-remover">Browse All Products</h2>
                 </a>
               </div>
 

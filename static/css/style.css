@@ -3,11 +3,16 @@
 }
 
 #topnav{
-    background-color: rgb(54, 54, 54);
+    background-color: #1d2128;
 }
 
 body{
     background-image: url("../../media/bytesizebackground.png");
     background-repeat: repeat;
     background-color: #1d2128;
+    background-attachment: fixed;
+}
+
+.link-remover{
+    text-decoration: none;
 }
