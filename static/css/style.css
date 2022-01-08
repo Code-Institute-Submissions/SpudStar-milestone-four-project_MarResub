@@ -1,8 +1,13 @@
 .nav-offset{
-    padding-top:60px;
-    background-color: rgb(18, 7, 48);
+    padding-top:120px;
 }
 
 #topnav{
     background-color: rgb(54, 54, 54);
+}
+
+body{
+    background-image: url("../../media/bytesizebackground.png");
+    background-repeat: repeat;
+    background-color: #1d2128;
 }
