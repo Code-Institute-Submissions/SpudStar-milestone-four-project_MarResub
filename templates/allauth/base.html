@@ -39,13 +39,31 @@
       <header class="container-fluid fixed-top">
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
             <div class="row my-auto">
+              <div class="col-12 col-lg-4">
                 <a href="{% url 'home' %}" class="col-12 col-lg-4 text-lg-left">
-                    <h2 class="logo-font text-black ">Bytesized Goods</h2>
+                  <h2 class="logo-font text-black ">Bytesized Goods</h2>
                 </a>
-                <div class="col-12 col-lg-4"></div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <form method="GET" action="{% url 'products' %}">
+                  <div class="input-group w-100">
+                      <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Filter by Name">
+                      <div class="input-group-append">
+                        <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                          <span class="icon">
+                            <i class="fas fa-search"></i>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                </form>
+              </div>
+              <div class="col-12 col-lg-4">
                 <a href="{% url 'products' %}" class="col-12 col-lg-4">
                   <h2 class="logo-font text-black ">Browse All Products</h2>
                 </a>
+              </div>
+
             </div>
 
         </div>
