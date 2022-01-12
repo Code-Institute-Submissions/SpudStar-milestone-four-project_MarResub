@@ -16,3 +16,10 @@ body{
 .link-remover{
     text-decoration: none;
 }
+
+.cat_one_normal{
+    background-image: url("../../media/typenormalbutton.png");
+    background-repeat: no-repeat;
+    width:104px;
+    height:39px;
+}
