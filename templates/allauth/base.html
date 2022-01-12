@@ -1,5 +1,4 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,6 +61,9 @@
                 <a href="{% url 'products' %}" class="col-12 col-lg-4">
                   <h2 class="logo-font text-black link-remover">Browse All Products</h2>
                 </a>
+                <a href="{% url 'bag' %}" class="col-12 col-lg-4">
+                  <h2 class="logo-font text-black link-remover">bag test</h2>
+                </a>
               </div>
 
             </div>
@@ -77,6 +79,7 @@
         </div>
         <div class="collapse" id="collapseExample">
           <div class="card card-body collapse_test">
+            
             <div class="cat_normal button_box">
               <a href="{% url 'products' %}?category=1" class="button_link"></a>
             </div>
