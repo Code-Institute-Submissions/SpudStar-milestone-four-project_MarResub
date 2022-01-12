@@ -14,7 +14,7 @@ def all_products(request):
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category']
-            queries = Q(type1__in=categories) | Q(type2__in=categories)
+            queries = Q(type1=categories) | Q(type2=categories)
             products = products.filter(queries)
 
         if 'q' in request.GET:
