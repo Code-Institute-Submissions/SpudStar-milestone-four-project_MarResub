@@ -17,9 +17,95 @@ body{
     text-decoration: none;
 }
 
-.cat_one_normal{
+/* CSS for drop down filter buttons */
+
+.cat_normal{
     background-image: url("../../media/typenormalbutton.png");
+}
+
+.cat_fire{
+    background-image: url("../../media/typefirebutton.png");
+}
+
+.cat_water{
+    background-image: url("../../media/typewaterbutton.png");
+}
+
+.cat_grass{
+    background-image: url("../../media/typegrassbutton.png");
+}
+
+.cat_electric{
+    background-image: url("../../media/typeelectricbutton.png");
+}
+
+.cat_ice{
+    background-image: url("../../media/typeicebutton.png");
+}
+
+.cat_fighting{
+    background-image: url("../../media/typefightingbutton.png");
+}
+
+.cat_poison{
+    background-image: url("../../media/typepoisonbutton.png");
+}
+
+.cat_ground{
+    background-image: url("../../media/typegroundbutton.png");
+}
+
+.cat_flying{
+    background-image: url("../../media/typeflyingbutton.png");
+}
+
+.cat_psychic{
+    background-image: url("../../media/typepsychicbutton.png");
+}
+
+.cat_bug{
+    background-image: url("../../media/typebugbutton.png");
+}
+
+.cat_rock{
+    background-image: url("../../media/typerockbutton.png");
+}
+
+.cat_ghost{
+    background-image: url("../../media/typeghostbutton.png");
+}
+
+.cat_dark{
+    background-image: url("../../media/typedarkbutton.png");
+}
+
+.cat_dragon{
+    background-image: url("../../media/typedragonbutton.png");
+}
+
+.cat_steel{
+    background-image: url("../../media/typesteelbutton.png");
+}
+
+.cat_fairy{
+    background-image: url("../../media/typefairybutton.png");
+}
+
+.button_link{
+    width:100%;
+    height:100%;
+    display:inline-block;
+    border-radius:15px;
+}
+
+.button_box{
     background-repeat: no-repeat;
+    display:inline-block;
     width:104px;
     height:39px;
+}
+
+.collapse_test{
+    display:inline-block;
+    width:100%;
 }
