@@ -1,6 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 def bag(request):
     return render(request, 'bag/bag.html')
+
+def add_to_bag(request, item_id):
+
+    redirect_url = request.POST.get('redirect_url')
+    bag = request.session.get('bag', {})
+
+    if item_id not in list(bag.keys()):
+        bag[item_id] = 1
+
+    # CODE NEEDED TO SEND MESSAGE TO USER - ITEM ALREADY IN BAG (As due to website context only 1 quantity can occur)
+    request.session['bag'] = bag
+    print(request.session['bag'])
+    return redirect(redirect_url)
