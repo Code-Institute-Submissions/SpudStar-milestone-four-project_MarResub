@@ -2,4 +2,13 @@
 {% load static %}
 
 {% block content %}
+    <div class="row">
+        <div class ="col">
+            {% if bag_items %}
+                <h2>ITEMS</h2>
+            {% else %}
+                <h2>EMPTY</h2>
+            {% end if %}
+        </div>
+    </div> 
 {% endblock %}
