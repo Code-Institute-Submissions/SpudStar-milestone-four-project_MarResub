@@ -36,21 +36,20 @@
     <title>ByteSized Goods {% block subtitle %} {% endblock %}</title>
   </head>
   <body>
-      <header id="topnav" class="container-fluid fixed-top">
-        <div class="row pt-lg-2 d-none d-lg-flex">
-            <div class="row my-auto">
-              <div class="col-12 col-lg-4">
-                <a href="{% url 'home' %}" class="col-12 col-lg-4 text-lg-left">
+      <header id="topnav" class="container-fluid fixed-top topbuffer">
+        <div class="row pt-lg-2 d-lg-flex">
+              <div class="col-12 col-lg-4 text-lg-left">
+                <a href="{% url 'home' %}" class="link-remover clickable">
                   <h2 class="logo-font text-black link-remover">Bytesized Goods</h2>
                 </a>
               </div>
-              <div class="col-12 col-lg-4">
+              <div class="col-12 col-lg-4 searchbar">
                 <form method="GET" action="{% url 'products' %}">
                   <div class="input-group w-100">
-                      <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Filter by Name">
+                      <input class="form-control border border-black rounded-5" type="text" name="q" placeholder="Browse by Name">
                       <div class="input-group-append">
-                        <button class="form-control btn btn-black border border-black rounded-0" type="submit">
-                          <span class="icon">
+                        <button class="form-control btn btn-black border border-black rounded-5" type="submit">
+                          <span class="icon text-white">
                             <i class="fas fa-search"></i>
                           </span>
                         </button>
@@ -58,21 +57,15 @@
                     </div>
                 </form>
               </div>
-              <div class="col-12 col-lg-4">
-                <a href="{% url 'products' %}" class="col-12 col-lg-4">
-                  <h2 class="logo-font text-black link-remover">Browse All Products</h2>
-                </a>
-                <a href="{% url 'bag' %}" class="col-12 col-lg-4">
-                  <h2 class="logo-font text-black link-remover">bag test</h2>
+              <div class="col-12 col-lg-4 text-lg-right">
+                <a href="{% url 'bag' %}" class="link-remover clickable">
+                  <h2 class="logo-font text-black"><span class="icon"><i class="fas fa-shopping-bag"></i></span></h2>
                 </a>
               </div>
-
-            </div>
-
         </div>
         <!--Expanding div code courtesy of Bootstrap library https://getbootstrap.com/docs/4.0/components/collapse/-->
         <div class="row">
-          <div>
+          <div class="col">
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
               Filter by Type
             </a>

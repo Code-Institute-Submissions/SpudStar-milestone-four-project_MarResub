@@ -3,7 +3,7 @@
 }
 
 #topnav{
-    background-color: #1d2128;
+    background-color: #2d3035;
 }
 
 body{
@@ -13,8 +13,25 @@ body{
     background-attachment: fixed;
 }
 
-.link-remover{
-    text-decoration: none;
+a.link-remover{
+    color:#b3b3b3 !important;
+    text-decoration:none;
+}
+
+a.link-remover:hover {
+    color:#ffffff !important;
+}
+
+.clickable {
+    cursor:pointer; 
+}
+
+.topbuffer{
+    padding-top:20px;
+}
+
+.searchbar{
+    max-width: 500px;
 }
 
 /* CSS for drop down filter buttons */
