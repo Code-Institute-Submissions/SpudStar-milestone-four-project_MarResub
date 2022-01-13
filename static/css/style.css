@@ -36,75 +36,75 @@ a.link-remover:hover {
 
 /* CSS for drop down filter buttons */
 
-.cat_normal{
+.cat_1{
     background-image: url("../../media/typenormalbutton.png");
 }
 
-.cat_fire{
+.cat_2{
     background-image: url("../../media/typefirebutton.png");
 }
 
-.cat_water{
+.cat_3{
     background-image: url("../../media/typewaterbutton.png");
 }
 
-.cat_grass{
+.cat_4{
     background-image: url("../../media/typegrassbutton.png");
 }
 
-.cat_electric{
+.cat_5{
     background-image: url("../../media/typeelectricbutton.png");
 }
 
-.cat_ice{
+.cat_6{
     background-image: url("../../media/typeicebutton.png");
 }
 
-.cat_fighting{
+.cat_7{
     background-image: url("../../media/typefightingbutton.png");
 }
 
-.cat_poison{
+.cat_8{
     background-image: url("../../media/typepoisonbutton.png");
 }
 
-.cat_ground{
+.cat_9{
     background-image: url("../../media/typegroundbutton.png");
 }
 
-.cat_flying{
+.cat_10{
     background-image: url("../../media/typeflyingbutton.png");
 }
 
-.cat_psychic{
+.cat_11{
     background-image: url("../../media/typepsychicbutton.png");
 }
 
-.cat_bug{
+.cat_12{
     background-image: url("../../media/typebugbutton.png");
 }
 
-.cat_rock{
+.cat_13{
     background-image: url("../../media/typerockbutton.png");
 }
 
-.cat_ghost{
+.cat_14{
     background-image: url("../../media/typeghostbutton.png");
 }
 
-.cat_dark{
+.cat_15{
     background-image: url("../../media/typedarkbutton.png");
 }
 
-.cat_dragon{
+.cat_16{
     background-image: url("../../media/typedragonbutton.png");
 }
 
-.cat_steel{
+.cat_17{
     background-image: url("../../media/typesteelbutton.png");
 }
 
-.cat_fairy{
+.cat_18{
     background-image: url("../../media/typefairybutton.png");
 }
 

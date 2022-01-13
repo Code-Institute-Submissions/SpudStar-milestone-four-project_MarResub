@@ -21,11 +21,11 @@
                                         <p class="mb-0">{{ product.name }}</p>
                                     </div>
                                     <div class = "row">
-                                        <div class="cat_{{ product.type1 }} button_box col-6">
+                                        <div class="cat_{{ product.type1.pk }} button_box col-6">
                                             <a href="{% url 'products' %}?category={{ product.type1.pk }}" class="button_link"></a>
                                         </div>
                                         {% if product.type2 %}
-                                            <div class="cat_normal button_box col-6">
+                                            <div class="cat_{{ product.type2 }} button_box col-6">
                                                 <a href="{% url 'products' %}?category={{ product.type2 }}" class="button_link"></a>
                                             </div>
                                         {% endif %}
