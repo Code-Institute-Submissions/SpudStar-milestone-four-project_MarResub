@@ -38,74 +38,92 @@ a.link-remover:hover {
 
 .cat_1{
     background-image: url("../../media/typenormalbutton.png");
+    background-size: contain;
 }
 
 .cat_2{
     background-image: url("../../media/typefirebutton.png");
+    background-size: contain;
 }
 
 .cat_3{
     background-image: url("../../media/typewaterbutton.png");
+    background-size: contain;
 }
 
 .cat_4{
     background-image: url("../../media/typegrassbutton.png");
+    background-size: contain;
 }
 
 .cat_5{
     background-image: url("../../media/typeelectricbutton.png");
+    background-size: contain;
 }
 
 .cat_6{
     background-image: url("../../media/typeicebutton.png");
+    background-size: contain;
 }
 
 .cat_7{
     background-image: url("../../media/typefightingbutton.png");
+    background-size: contain;
 }
 
 .cat_8{
     background-image: url("../../media/typepoisonbutton.png");
+    background-size: contain;
 }
 
 .cat_9{
     background-image: url("../../media/typegroundbutton.png");
+    background-size: contain;
 }
 
 .cat_10{
     background-image: url("../../media/typeflyingbutton.png");
+    background-size: contain;
 }
 
 .cat_11{
     background-image: url("../../media/typepsychicbutton.png");
+    background-size: contain;
 }
 
 .cat_12{
     background-image: url("../../media/typebugbutton.png");
+    background-size: contain;
 }
 
 .cat_13{
     background-image: url("../../media/typerockbutton.png");
+    background-size: contain;
 }
 
 .cat_14{
     background-image: url("../../media/typeghostbutton.png");
+    background-size: contain;
 }
 
 .cat_15{
     background-image: url("../../media/typedarkbutton.png");
+    background-size: contain;
 }
 
 .cat_16{
     background-image: url("../../media/typedragonbutton.png");
+    background-size: contain;
 }
 
 .cat_17{
     background-image: url("../../media/typesteelbutton.png");
+    background-size: contain;
 }
 
 .cat_18{
     background-image: url("../../media/typefairybutton.png");
+    background-size: contain;
 }
 
 .button_link{
@@ -126,6 +144,8 @@ a.link-remover:hover {
     display:inline-block;
     width:100%;
 }
+
+
 
 /* TEMP CLASSES FROM MILESTONE 3 TO TEST PRODUCT DETAIL FOR STUFF */
 .card-container{
