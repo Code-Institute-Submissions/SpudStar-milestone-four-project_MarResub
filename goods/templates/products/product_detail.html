@@ -7,7 +7,7 @@
             <!-- TEMP CLASSES FROM MILESTONE 3 TO TEST PRODUCT DETAIL FOR STUFF -->
             <div class = "card-container">
                 <div class="card-image-container">
-                    <img class="card-img-top img-fluid" src="../../../media/{{ product.pdex_no }}.png" alt="{{ product.name }}"> <!-- Displays the cards image using a url-->
+                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" alt="{{ product.name }}"> <!-- Displays the cards image using a url-->
                 </div> 
             </div>
         </div>

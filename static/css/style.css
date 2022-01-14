@@ -1,5 +1,10 @@
-.nav-offset{
+div.nav-offset{
     padding-top:120px;
+    background-color: #1d2128d3;
+    color:#ffffff;
+    height:100vh;
+    max-width:95vw;
+    margin:auto;
 }
 
 #topnav{
@@ -11,6 +16,11 @@ body{
     background-repeat: repeat;
     background-color: #1d2128;
     background-attachment: fixed;
+}
+
+.content_holder{
+    background-color: #1d2128 !important;
+    color:#ffffff !important;
 }
 
 a.link-remover{
@@ -156,9 +166,8 @@ tr{
 
 /* TEMP CLASSES FROM MILESTONE 3 TO TEST PRODUCT DETAIL FOR STUFF */
 .card-container{
-    background-color: rgb(145, 100, 63);
     border-radius: 20px;
-    border: solid rgb(43, 27, 10) 5px;
+    border: solid rgb(0, 0, 0) 5px;
     margin-left:20px;
     margin-bottom:40px;
     display:inline-block;
@@ -173,7 +182,7 @@ tr{
 .card-image-container{
     width:100%;
     height:40%;
-    background-color: rgb(65, 39, 18);
+    background-color: rgb(209, 209, 209);
     display:flex;
     justify-content: center;
 }
@@ -213,8 +222,4 @@ tr{
 .stats p{
     font-size: 15px;
     font-weight: 700;
-}
-
-.info-background{
-    background-color: #ffffff;
 }

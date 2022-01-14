@@ -27,3 +27,18 @@ var card = elements.create('card', {
   });
 
 card.mount('#card-element');
+
+card.addEventListener('change', function (event) {
+    var errorDiv = document.getElementById('card-error-message');
+    if (event.error) {
+        var html = `
+            <span class="icon" role="alert">
+                <i class="fas fa-times"></i>
+            </span>
+            <span>${event.error.message}</span>
+        `;
+        $(errorDiv).html(html);
+    } else {
+        errorDiv.textContent = '';
+    }
+});
