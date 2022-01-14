@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="../../static/checkout/css/checkout.css">
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -22,6 +22,7 @@
                 <legend>Payment Information</legend>
                 {% endif %}
                 <div id="card-element"></div>
+                <div id="card-error-message"></div>
             </fieldset>
             <div>
                 <!-- Buttons -->
