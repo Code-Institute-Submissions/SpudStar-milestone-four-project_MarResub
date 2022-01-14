@@ -23,6 +23,7 @@
                                 <th scope="col"></th>
                                 <th scope="col">Owner</th>
                                 <th scope="col">Trainer Code</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
 
@@ -41,6 +42,9 @@
                                 <td class="py-3">
                                     <p class="my-0">Trainer Code here</p>
                                 </td>
+                                <td class="py-3">
+                                    <a id="remove_{{ item.item_id }}" class="clickable remove-item">Remove</a>
+                                </td>
                             </tr>
                         {% endfor %}
                         <tr>
@@ -49,12 +53,12 @@
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
-                                    <span class="text-uppercase">Keep Shopping</span>
+                                    <span class="text-uppercase">Keep Browsing</span>
                                 </a>
                                 <a href="" class="btn btn-black rounded-0 btn-lg">
-                                    <span class="text-uppercase">Secure Checkout</span>
+                                    <span class="text-uppercase">Submit Requests</span>
                                     <span class="icon">
-                                        <i class="fas fa-lock"></i>
+                                        <i class="fas fa-paper-plane"></i>
                                     </span>
                                 </a>
                             </td>
@@ -73,4 +77,22 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+
+<script type="text/javascript">
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var url = `/bag/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+</script>    
+
 {% endblock %}
