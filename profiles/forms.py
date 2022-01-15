@@ -1,7 +1,5 @@
-
 from django import forms
 from .models import UserProfile
-
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -15,3 +13,5 @@ class UserProfileForm(forms.ModelForm):
             'default_trainer_code': 'Trainer Code',
             'default_email': 'Email',
         }
+
+        self.fields['default_trainer_code'].widget.attrs['autofocus'] = True
