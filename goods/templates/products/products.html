@@ -21,17 +21,23 @@
                                         <p class="mb-0">{{ product.name }}</p>
                                     </div>
                                     <div class = "row">
-                                        <div class="cat_{{ product.type1.pk }} button_box col-6">
-                                            <a href="{% url 'products' %}?category={{ product.type1.pk }}" class="button_link"></a>
-                                        </div>
-                                        {% if product.type2 %}
-                                            <div class="cat_{{ product.type2 }} button_box col-6">
-                                                <a href="{% url 'products' %}?category={{ product.type2 }}" class="button_link"></a>
-                                            </div>
-                                        {% endif %}
+                                        <ul class="list-inline list-unstyled text-center">
+                                            <li class="list-inline-item">
+                                              <a href="{% url 'products' %}?category={{ product.type1.pk }}">
+                                                <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
+                                              </a>
+                                            </li>
+                                            {% if product.type2 %}
+                                            <li class="list-inline-item">
+                                                <a href="{% url 'products' %}?category={{ product.type2.pk }}">
+                                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}">
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="card-footer bg-white pt-0 border-0 text-center">
+                                <div class="card-footer bg-white pt-0 border-0 text-center product-info-display">
                                     <div class="row">
                                         <div class="col">
                                             <p class="lead mb-0 text-center font-weight-bold">${{ product.price }}</p>

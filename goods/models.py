@@ -18,7 +18,8 @@ class Info(models.Model):
     abilities = models.CharField(max_length=30)
     type1 = models.ForeignKey('Category', null=True, blank=True, 
                               on_delete=models.SET_NULL)
-    type2 = models.CharField(max_length=20)
+    type2 = models.ForeignKey('Category', null=True, blank=True, 
+                              on_delete=models.SET_NULL, related_name='typ2')
     attack = models.IntegerField(null=True, blank=True)
     defense = models.IntegerField(null=True, blank=True)
     hp = models.IntegerField(null=True, blank=True)

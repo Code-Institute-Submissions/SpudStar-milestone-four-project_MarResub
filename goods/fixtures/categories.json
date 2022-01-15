@@ -106,5 +106,11 @@
         "pk":  "18",
         "fields" : { "name":  "fairy",
         "friendly_name":  "Fairy"
+    }},
+    {
+        "model":  "goods.category",
+        "pk":  "19",
+        "fields" : { "name":  "empty",
+        "friendly_name":  "Empty"
     }}
 ]
