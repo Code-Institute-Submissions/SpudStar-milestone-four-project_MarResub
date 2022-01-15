@@ -65,7 +65,7 @@ def add_product(request):
 def edit_product(request, product_id):
     """ Edit a product in the store """
     product = get_object_or_404(Info, pk=product_id)
-
+    print(product)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
@@ -79,6 +79,11 @@ def edit_product(request, product_id):
         'form': form,
         'product': product,
     }
+    print("TEST")
+    print(product)
+    print(product)
+    print(product)
+    print("TEST")
     return render(request, template, context)
 
 def delete_product(request, product_id):
