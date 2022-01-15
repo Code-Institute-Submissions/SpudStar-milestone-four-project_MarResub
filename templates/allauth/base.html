@@ -37,7 +37,7 @@
     <title>ByteSized Trades {% block subtitle %} {% endblock %}</title>
   </head>
   <body>
-      <header id="topnav" class="container-fluid fixed-top topbuffer">
+      <header id="topnav" class="container-fluid fixed-top topbuffer pb-2">
         <div class="row pt-lg-2 d-lg-flex">
               <div class="col-12 col-lg-4 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="link-remover clickable">
@@ -70,7 +70,7 @@
                       <div class="dropdown-menu border-0" aria-labelledby="user-options">
                           {% if request.user.is_authenticated %}
                               {% if request.user.is_superuser %}
-                                  <a href="" class="dropdown-item">Product Management</a>
+                                  <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
                               {% endif %}
                               <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                               <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -100,12 +100,12 @@
         <!--Expanding div code courtesy of Bootstrap library https://getbootstrap.com/docs/4.0/components/collapse/-->
         <div class="row text-center">
           <div class="col">
-            <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseTypes" role="button" aria-expanded="false" aria-controls="collapseExample">
               Filter by Type
             </a>
           </div>
         </div>
-        <div class="collapse" id="collapseExample">
+        <div class="collapse" id="collapseTypes">
           <ul class="list-inline list-unstyled text-center mt-3">
             <li class="list-inline-item mt-3">
               <a href="{% url 'products' %}?category=1">
@@ -200,10 +200,15 @@
           </ul>
         </div>
     </header>
+
     <div class = "nav-offset container-fluid">
       {% block content %}
       {% endblock %}
     </div>
+
+    <footer id = "botnav" class="text-center pb-5 pt-2">
+      <h5>Website made by <i class="fas fa-copyright"></i>Edward Stanley</h5>
+    </footer>
 
     {% block postloadjs %}
     {% endblock %}

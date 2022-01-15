@@ -21,29 +21,37 @@
                             <tr>
                                 <th scope="col">Product Info</th>
                                 <th scope="col"></th>
+                                <th scope="col">Stats</th>
                                 <th scope="col">Owner</th>
-                                <th scope="col">Trainer Code</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
 
                         {% for item in bag_items %}
-                            <tr class="tablecontainer">
+                            <tr class="tablecontainer text-light">
                                 <td class="p-3 w-25">
-                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}{{ item.product.pdex_no }}.png">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ item.product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}"> <!-- Displays the cards image using a url-->
                                 </td>
                                 <td class="py-3">
                                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                    <p class="my-0">Pokedex No: {{ item.product.pdex_no }}</p>
+                                    <p class="my-0">Level: {{ item.product.level }}</p>
+                                    <p class="my-0">Generation: {{ item.product.generation }}</p>
                                     <!-- Possibly add SKU here -->
                                 </td>
                                 <td class="py-3">
-                                    <p class="my-0">Owner here</p>
+                                    <p class="my-0">Hp: {{ item.product.hp }}</p>
+                                    <p class="my-0">Attack: {{ item.product.attack }}</p>
+                                    <p class="my-0">Defense: {{ item.product.defense }}</p>
+                                    <p class="my-0">Sp Attack: {{ item.product.sp_attack }}</p>
+                                    <p class="my-0">Sp Defense: {{ item.product.sp_defense }}</p>
+                                    <p class="my-0">Speed: {{ item.product.speed }}</p>
                                 </td>
                                 <td class="py-3">
-                                    <p class="my-0">Trainer Code here</p>
+                                    <p class="my-0">Owned by: {{ item.product.owner_profile }}</p>
                                 </td>
                                 <td class="py-3">
-                                    <a id="remove_{{ item.item_id }}" class="clickable remove-item">Remove</a>
+                                    <a id="remove_{{ item.item_id }}" class="clickable remove-item text-danger">Remove</a>
                                 </td>
                             </tr>
                         {% endfor %}

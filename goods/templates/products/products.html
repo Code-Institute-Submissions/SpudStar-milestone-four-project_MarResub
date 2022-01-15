@@ -11,14 +11,14 @@
                     {% for product in products %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 py-2 text-dark">
                             <div class="card h-100">
-                                <a href="{% url 'product_detail' product.id %}" class=".bg-secondary">
+                                <a href="{% url 'product_detail' product.id %}" class="bg-secondary">
                                     <img class=" img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}">
                                 </a>
                                 <div class="card-body p-0">
                                     <div class = "row my-2 text-center">
-                                        <h4 class="mb-0 col">{{ product.name }}</h4>
+                                        <h4 class="mb-0 col">{{ product.name }} Lvl: {{ product.level }}</h4>
                                     </div>
-                                    <div class = "row text-center pt-2">
+                                    <div class = "row text-center py-2">
                                         <ul class="list-inline list-unstyled text-center m-auto">
                                             <li class="list-inline-item p-0 m-0">
                                               <a href="{% url 'products' %}?category={{ product.type1.pk }}">
@@ -38,7 +38,7 @@
                                 <div class="card-footer bg-white pt-1 border-0 text-center product-info-display">
                                     <div class="row">
                                         <div class="col">
-                                            <p class="lead mb-0 text-center font-weight-bold">${{ product.price }}</p>
+                                            <p class="lead mb-0 text-center font-weight-bold">Owner: {{ product.owner_profile }}</p>
                                         </div>
                                     </div>
                                 </div>
