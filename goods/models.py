@@ -1,5 +1,6 @@
 from django.db import models
 
+from profiles.models import UserProfile
 # Create your models here.
 
 class Category(models.Model):
@@ -28,6 +29,8 @@ class Info(models.Model):
     level = models.IntegerField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     pdex_no = models.IntegerField()
+    owner_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+                                     null=True, blank=True, related_name='owner_profile')
 
     def __str__(self):
         return self.name
