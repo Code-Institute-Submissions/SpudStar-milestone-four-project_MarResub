@@ -3,8 +3,12 @@ div.nav-offset{
     background-color: #1d2128d3;
     color:#ffffff;
     height:100vh;
-    max-width:95vw;
-    margin:auto;
+}
+
+@media (max-width:995) { 
+    div.nav-offset{
+        padding-top:240px;
+    }
 }
 
 #topnav{
@@ -47,10 +51,6 @@ input.searchbar{
 
 .collapse-adjust{
     width:100%;
-}
-
-.tester{
-    width:200px;
 }
 
 /* CSS for product display */
