@@ -39,16 +39,16 @@
   <body>
       <header id="topnav" class="container-fluid fixed-top topbuffer">
         <div class="row pt-lg-2 d-lg-flex">
-              <div class="col-12 col-lg-4 text-lg-left">
+              <div class="col-12 col-lg-4 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="link-remover clickable">
                   <h2 class="logo-font link-remover">Bytesized Goods</h2>
                 </a>
               </div>
-              <div class="col-12 col-lg-4 searchbar">
+              <div class="col-12 col-lg-4 text-center mx-auto">
                 <form method="GET" action="{% url 'products' %}">
-                  <div class="input-group w-100">
+                  <div class="input-group">
                       <input class="form-control border border-black rounded-5" type="text" name="q" placeholder="Browse by Name">
-                      <div class="input-group-append">
+                      <div class="input-group-append text-center">
                         <button class="form-control btn btn-black border border-black rounded-5" type="submit">
                           <span class="icon text-white">
                             <i class="fas fa-search"></i>
@@ -60,7 +60,7 @@
               </div>
               <div class="col-12 col-lg-4 text-lg-right">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                  <li class="list-inline-item dropdown">
+                  <li class="list-inline-item dropdown nav-size-extender">
                       <a class="text-black nav-link link-remover" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <div class="text-center">
                               <div><i class="fas fa-user fa-lg"></i></div>
@@ -72,7 +72,7 @@
                               {% if request.user.is_superuser %}
                                   <a href="" class="dropdown-item">Product Management</a>
                               {% endif %}
-                              <a href="" class="dropdown-item">My Profile</a>
+                              <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                               <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                           {% else %}
                               <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
@@ -98,7 +98,7 @@
             </div>
         </div>
         <!--Expanding div code courtesy of Bootstrap library https://getbootstrap.com/docs/4.0/components/collapse/-->
-        <div class="row">
+        <div class="row text-center">
           <div class="col">
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
               Filter by Type
@@ -106,62 +106,98 @@
           </div>
         </div>
         <div class="collapse" id="collapseExample">
-          <div class="card card-body collapse_test">
-            <div class="cat_1 button_box">
-              <a href="{% url 'products' %}?category=1" class="button_link"></a>
-            </div>
-            <div class="cat_2 button_box">
-              <a href="{% url 'products' %}?category=2" class="button_link"></a>
-            </div>
-            <div class="cat_3 button_box">
-              <a href="{% url 'products' %}?category=3" class="button_link"></a>
-            </div>
-            <div class="cat_4 button_box">
-              <a href="{% url 'products' %}?category=4" class="button_link"></a>
-            </div>
-            <div class="cat_5 button_box">
-              <a href="{% url 'products' %}?category=5" class="button_link"></a>
-            </div>
-            <div class="cat_6 button_box">
-              <a href="{% url 'products' %}?category=6" class="button_link"></a>
-            </div>
-            <div class="cat_7 button_box">
-              <a href="{% url 'products' %}?category=7" class="button_link"></a>
-            </div>
-            <div class="cat_8 button_box">
-              <a href="{% url 'products' %}?category=8" class="button_link"></a>
-            </div>
-            <div class="cat_9 button_box">
-              <a href="{% url 'products' %}?category=9" class="button_link"></a>
-            </div>
-            <div class="cat_10 button_box">
-              <a href="{% url 'products' %}?category=10" class="button_link"></a>
-            </div>
-            <div class="cat_11 button_box">
-              <a href="{% url 'products' %}?category=11" class="button_link"></a>
-            </div>
-            <div class="cat_12 button_box">
-              <a href="{% url 'products' %}?category=12" class="button_link"></a>
-            </div>
-            <div class="cat_13 button_box">
-              <a href="{% url 'products' %}?category=13" class="button_link"></a>
-            </div>
-            <div class="cat_14 button_box">
-              <a href="{% url 'products' %}?category=14" class="button_link"></a>
-            </div>
-            <div class="cat_15 button_box">
-              <a href="{% url 'products' %}?category=15" class="button_link"></a>
-            </div>
-            <div class="cat_16 button_box">
-              <a href="{% url 'products' %}?category=16" class="button_link"></a>
-            </div>
-            <div class="cat_17 button_box">
-              <a href="{% url 'products' %}?category=17" class="button_link"></a>
-            </div>
-            <div class="cat_18 button_box">
-              <a href="{% url 'products' %}?category=18" class="button_link"></a>
-            </div>
-          </div>
+          <ul class="card card-body list-inline list-unstyled text-center">
+            <li class="list-inline-item tester">
+              <a href="{% url 'products' %}?category=1">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typenormalbutton.png" alt="Filter by normal types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=2">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typefirebutton.png" alt="Filter by fire types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=3">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typewaterbutton.png" alt="Filter by water types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=4">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typegrassbutton.png" alt="Filter by grass types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=5">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typeelectricbutton.png" alt="Filter by electric types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=6">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typeicebutton.png" alt="Filter by ice types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=7">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typefightingbutton.png" alt="Filter by fighting types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=8">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typepoisonbutton.png" alt="Filter by poison types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=9">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typegroundbutton.png" alt="Filter by ground types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=10">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typeflyingbutton.png" alt="Filter by flying types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=11">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typepsychicbutton.png" alt="Filter by psychic types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=12">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typebugbutton.png" alt="Filter by bug types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=13">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typerockbutton.png" alt="Filter by rock types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=14">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typeghostbutton.png" alt="Filter by ghost types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=15">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typedarkbutton.png" alt="Filter by dark types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=16">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typedragonbutton.png" alt="Filter by dragon types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=17">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typesteelbutton.png" alt="Filter by steel types">
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="{% url 'products' %}?category=18">
+                <img class="img-fluid" src="{{ MEDIA_URL }}typefairybutton.png" alt="Filter by fairy types">
+              </a>
+            </li>
+          </ul>
         </div>
     </header>
     <div class = "nav-offset">
