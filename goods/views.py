@@ -85,3 +85,9 @@ def edit_product(request, product_id):
     print(product)
     print("TEST")
     return render(request, template, context)
+
+def delete_product(request, product_id):
+    """ Delete a product from the store """
+    product = get_object_or_404(Info, pk=product_id)
+    product.delete()
+    return redirect(reverse('products'))
