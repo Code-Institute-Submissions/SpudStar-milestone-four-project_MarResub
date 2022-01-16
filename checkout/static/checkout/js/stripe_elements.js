@@ -1,3 +1,5 @@
+/* Please note that the following code is from Stripes library,
+This allows for the customer to checkout*/
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1,-1);
 var clientSecret = $('#id_client_secret').text().slice(1,-1);
 var stripe = Stripe(stripePublicKey);
@@ -68,7 +70,6 @@ form.addEventListener('submit', function(ev) {
         } else {
             if (result.paymentIntent.status === 'succeeded') {
                 form.submit();
-                print("FFFFFF")
             }
         }
     });

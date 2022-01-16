@@ -5,7 +5,7 @@ from django.db import models
 from goods.models import Info
 from profiles.models import UserProfile
 
-# Create your models here.
+# My order model, contains key fields for a trade request
 
 
 class Order(models.Model):
@@ -20,6 +20,7 @@ class Order(models.Model):
                                      null=True, blank=True,
                                      related_name='orders')
 
+    # Logic for generating order number from Boutique Ado
     def _generate_order_number(self):
 
         return uuid.uuid4().hex.upper()
@@ -34,6 +35,7 @@ class Order(models.Model):
         return self.order_number
 
 
+# Allows each pokemon in a request to be assigned to the same order
 class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
@@ -46,4 +48,3 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return self.product.name
-    # NEED SKU RETURN HERE, CHECKOUT2

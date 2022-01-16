@@ -7,6 +7,10 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta charset="UTF-8">
+      <meta name="keywords" content="pokemon, trades, nintendo, games, gaming">
+      <meta name="description" content="The main webpage for ByteSized Trades, a pokemon website to encourage pokemon trading">
+      <meta name="author" content="Edward Stanley">
     {% endblock %}
 
     {% block extra_meta %}
@@ -34,7 +38,7 @@
     {% block extra_scripts %}
     {% endblock %}
 
-    <title>ByteSized Trades {% block subtitle %} {% endblock %}</title>
+    <title>ByteSized Trades</title>
   </head>
   <body>
       <header id="topnav" class="container-fluid fixed-top topbuffer pb-2">
@@ -86,9 +90,9 @@
                         <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                         <p class="my-0">
                           {% if product_count %}
-                          Items: {{ product_count }}
+                            Items: {{ product_count }}
                           {% else %}
-                          Empty
+                            Empty
                           {% endif %}
                         </p>
                       </div>
@@ -106,6 +110,7 @@
           </div>
         </div>
         <div class="collapse" id="collapseTypes">
+          <!-- List of all types, planned to do it dynamically using python logic but ran out of time unfortunatley -->
           <ul class="list-inline list-unstyled text-center mt-3">
             <li class="list-inline-item mt-3">
               <a href="{% url 'products' %}?category=1">

@@ -4,10 +4,11 @@ from .models import UserProfile
 from .forms import UserProfileForm
 
 
+# Tries to retrieve the user's profile, and orders
 def profile(request):
-    """ Display the user's profile. """
     profiles = get_object_or_404(UserProfile, user=request.user)
 
+    # If the user updates their information, save it
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profiles)
         if form.is_valid():

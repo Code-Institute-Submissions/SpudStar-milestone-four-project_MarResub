@@ -5,12 +5,14 @@ from goods.models import Info
 from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
+# Gets the cost of a request
 from bag.contexts import SUBSCRIPTION_COST
 from .forms import OrderForm
 from profiles.forms import UserProfileForm
 
 import stripe
-# Create your views here.
+
+# Uses the stripe keys and the form data to make a purchase
 
 
 def checkout(request):
@@ -27,7 +29,8 @@ def checkout(request):
         }
 
         order_form = OrderForm(form_data)
-        
+
+        # If the form is valid, creates an order
         if order_form.is_valid():
             order = order_form.save()
             for item_id, item_data in bag.items():
@@ -38,6 +41,7 @@ def checkout(request):
                             product=product,
                         )
                     order_line_item.save()
+                # If a pokemon somehow doesn't exist, returns to bag
                 except Info.DoesNotExist:
                     order.delete()
                     return redirect(reverse('view_bag'))
@@ -78,12 +82,11 @@ def checkout_success(request, order_number):
         order.user_profile = profile
         order.save()
 
-        # Saves the users info
         profile_data = {
             'default_trainer_number': order.user_trainer_code,
             'default_email': order.email,
-            'subscribed': True,
         }
+
         user_profile_form = UserProfileForm(profile_data, instance=profile)
         if user_profile_form.is_valid():
             user_profile_form.save()

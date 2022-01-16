@@ -1,6 +1,8 @@
 from django import forms
 from .models import Order
 
+# The order form setup, uses three fields for the user to fill
+
 
 class OrderForm(forms.ModelForm):
     class Meta:
@@ -23,5 +25,4 @@ class OrderForm(forms.ModelForm):
             else:
                 placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
