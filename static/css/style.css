@@ -4,10 +4,14 @@ div.nav-offset{
     color:#ffffff;
 }
 
-@media (max-width:995) { 
+@media(max-width:995px) { 
     div.nav-offset{
         padding-top:240px;
     }
+}
+
+body{
+    background-color: #1d2128;
 }
 
 #topnav,#botnav{
@@ -19,12 +23,6 @@ footer {
     border-top: 2px solid rgba(0, 0, 0, 0.6);;
     padding-top: 2.25rem;
     bottom:0;
-}
-
-body{
-    background-repeat: repeat;
-    background-color: #1d2128;
-    background-attachment: fixed;
 }
 
 .content-holder{
@@ -95,11 +93,4 @@ tr{
     height:20px;
     margin:0;
     margin-bottom:10px;
-}
-
-.card-name-container{
-    height:15%;
-    width:100%;
-    display:flex;
-    justify-content: center;
 }

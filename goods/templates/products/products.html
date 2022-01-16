@@ -2,16 +2,18 @@
 {% load static %}
 
 {% block content %}
-    <div class="overlay"></div>
+<!-- Possibly the most differentiated part of the project, 
+    used python logic to display all as well as generate the image fields and correct pokemon type buttons -->
     <div class="container-fluid">
         <div class="row">
-            <div class="product-container col-10 offset-1">
-                <div class="row mt-1 mb-2"></div>
+            <div class="col-10 offset-1">
                 <div class="row">
+                    <!-- Displays all the products filtered by the goods views.py category -->
                     {% for product in products %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 py-2 text-dark">
                             <div class="card h-100">
-                                <a href="{% url 'product_detail' product.id %}" class="bg-secondary">
+                                <!-- Checks to see if the pokemons pokedex number has an image, and gives the default if not -->
+                                <a href="{% url 'product_detail' product.id %}" class="bg-secondary" aria-label="Get more details on the current pokemon: {{ product.name }}">
                                     <img class=" img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}">
                                     
                                 </a>
@@ -22,13 +24,14 @@
                                     <div class = "row text-center py-2">
                                         <ul class="list-inline list-unstyled text-center m-auto">
                                             <li class="list-inline-item p-0 m-0">
-                                              <a href="{% url 'products' %}?category={{ product.type1.pk }}">
+                                              <a href="{% url 'products' %}?category={{ product.type1.pk }}" aria-label="Filter by {{ product.name }}'s first type: {{ product.type1 }}">
                                                 <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
                                               </a>
                                             </li>
+                                            <!-- Checks to see if the pokemon has a second type and only creates a link if so -->
                                             {% ifnotequal 19 product.type2.pk %}
                                             <li class="list-inline-item p-0 m-0">
-                                                <a href="{% url 'products' %}?category={{ product.type2.pk }}">
+                                                <a href="{% url 'products' %}?category={{ product.type2.pk }} " aria-label="Filter by {{ product.name }}'s second type: {{ product.type2 }}">
                                                     <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
                                                 </a>
                                             </li>
@@ -36,7 +39,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-footer bg-white pt-1 border-0 text-center product-info-display">
+                                <!-- Displays who owns the pokemon -->
+                                <div class="card-footer bg-white pt-1 border-0 text-center">
                                     <div class="row">
                                         <div class="col">
                                             <p class="lead mb-0 text-center font-weight-bold">Owner: {{ product.owner_profile }}</p>

@@ -2,9 +2,10 @@
 {% load static %}
 
 {% block content %}
+    <!-- Temporarily used my milestone 3 card creation project as a layout due to similar stat system -->
+    <!-- Have since edited it heavily to better suit my project, uses some of the same css class names but with the css for it changed -->
     <div class="row mt-4">
         <div class="col-lg-6 text-center">
-            <!-- TEMP CLASSES FROM MILESTONE 3 TO TEST PRODUCT DETAIL FOR STUFF -->
             <div class = "card-container text-center">
                 <div class="card-image-container text-center">
                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}"> <!-- Displays the cards image using a url-->
@@ -12,7 +13,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4 text-center">
-            <div class="product-details-container mb-5 mt-md-5 text-center">
+            <div class="mb-5 mt-md-5 text-center">
                 <h4 class="mb-0">{{ product.name }} Lvl: {{ product.level }}</h4>
                 <div class = "row text-center py-3">
                     <ul class="list-inline list-unstyled text-center m-auto">
@@ -60,12 +61,14 @@
                         <p>Speed: {{product.speed}}</p>   <!-- Displays the Speed stat-->
                     </div>
                 </div>
+                <!-- If the user is a superuser gives them the option to edit/delete products -->
                 {% if request.user.is_superuser %}
                     <small class="ml-3 my-3">
                         <a class="btn btn-outline-light" href="{% url 'edit_product' product.id %}">Edit</a> | 
                         <a class="text-danger btn btn-outline-danger" href="{% url 'delete_product' product.id %}">Delete</a>
                     </small>
                 {% endif %}
+                <!-- Same add to bag logic as boutique ado -->
                 <form action ="{% url 'add_to_bag' product.id %}" method ='POST'>
                     {% csrf_token %}
                     <div class="row my-3">

@@ -4,13 +4,10 @@ from django.db.models import Q
 from .models import Info
 from .forms import ProductForm
 
-# Create your views here.
+
+# Filters products based on the either the pokemons type, or name
 
 def all_products(request):
-
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
-        return redirect(reverse('home'))    
 
     products = Info.objects.all()
     query = None
@@ -19,6 +16,7 @@ def all_products(request):
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category']
+            # Checks both types for the type requested
             queries = Q(type1=categories) | Q(type2=categories)
             products = products.filter(queries)
 
@@ -49,15 +47,17 @@ def product_detail(request, product_id):
 
     return render(request, 'products/product_detail.html', context)
 
-def add_product(request):
-    """ Add a product to the store """
 
+# Allows pokemon to be added
+def add_product(request):
+
+    # Stops the user accessing via url
     if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        # Checks to see if the pokemon info is valid
         if form.is_valid():
             form.save()
             return redirect(reverse('add_product'))
@@ -71,10 +71,16 @@ def add_product(request):
 
     return render(request, template, context)
 
+
+# Allows an existing pokemon to be edited
 def edit_product(request, product_id):
-    """ Edit a product in the store """
+
+    # Stops the user accessing via url
+    if not request.user.is_superuser:
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Info, pk=product_id)
-    print(product)
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
@@ -88,15 +94,17 @@ def edit_product(request, product_id):
         'form': form,
         'product': product,
     }
-    print("TEST")
-    print(product)
-    print(product)
-    print(product)
-    print("TEST")
+
     return render(request, template, context)
 
+
+# Allows a pokemon to be removed from the database
 def delete_product(request, product_id):
-    """ Delete a product from the store """
+
+    # Stops the user accessing via url
+    if not request.user.is_superuser:
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Info, pk=product_id)
     product.delete()
     return redirect(reverse('products'))
