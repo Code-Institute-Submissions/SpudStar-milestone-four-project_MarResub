@@ -211,8 +211,7 @@ I had two major security concerns in the project:
 1) Accidently commiting the Heroku database link whilst testing deployment
 2) Accidently forgetting to put credentials.json in .gitignore and revealling bucket information
 
-Please note that for both of these cases I 1) Created a new heroku app with new database link, 2) Created a new bucked and Json file and placed the file in the gitignore.
-The websites security is not under threat and I can prove so if requested, The main reason I mention this is that I am unsure how to remove the information from the commits (Hence why i made new ones) so please be aware that the database in the commits and the json file are not the ones used for deployment and static file holding.
+Please note that for both of these cases I 1) Created a new heroku app with new database link, 2) I unfortunatley have been unable to find a way in time of submission of the project to pass the Json file required by Google Cloud as a Config Vars. I have had to create a new bucket as google unfortunatley disbanded the old one. Whilst I am looking into ways to do so, it will not be available for this submission. I have at least created the new one to show what the website looked like at the time of submission (Just making sure static and media files displayed)
 #
 ## Technologies used:
 ### Languages:
