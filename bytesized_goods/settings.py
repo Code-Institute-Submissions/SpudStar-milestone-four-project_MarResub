@@ -184,7 +184,7 @@ if "USE_CLOUD" in os.environ:
     MEDIA_URL = f"https://storage.cloud.google.com/{GS_BUCKET_NAME}/media/"
 
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        'newcredentials.json'
+        os.path.join(BASE_DIR, 'newcredentials.json')
     )
 
 
