@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-# from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -177,23 +176,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-"""
-if "USE_CLOUD" in os.environ:
-
-    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    STATICFILES_LOCATION = 'static'
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    MEDIAFILES_LOCATION = 'media'
-
-    GS_BUCKET_NAME = os.getenv('BUCKET_KEY', '')
-
-    STATIC_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/static/"
-    MEDIA_URL = f"https://storage.cloud.google.com/{GS_BUCKET_NAME}/media/"
-
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        'credentials.json'
-    )
-"""
 if "USE_CLOUD" in os.environ:
     AWS_BUCKET_NAME = os.getenv('BUCKET_KEY', '')
     AWS_S3_REGION_NAME = 'eu-west-2'
