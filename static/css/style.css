@@ -1,7 +1,8 @@
 div.nav-offset{
-    padding-top:120px;
-    background-color: #2d30356a;
+    padding-top:180px;
+    background-color: hsla(218, 8%, 19%, 0.416);
     color:#ffffff;
+    min-height: 92vh;
 }
 
 @media(max-width:995px) { 
@@ -23,6 +24,7 @@ footer {
     border-top: 2px solid rgba(0, 0, 0, 0.6);;
     padding-top: 2.25rem;
     bottom:0;
+    height:5vh;
 }
 
 .content-holder{

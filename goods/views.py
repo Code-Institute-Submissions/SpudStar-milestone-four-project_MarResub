@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Info
 from .forms import ProductForm
+import math
 
 
 # Filters products based on the either the pokemons type, or name
@@ -12,26 +13,41 @@ def all_products(request):
     products = Info.objects.all()
     query = None
     categories = None
+    page = 1
+    products_per_page = 20
 
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category']
             # Checks both types for the type requested
             queries = Q(type1=categories) | Q(type2=categories)
-            products = products.filter(queries)
+            try:
+                products = products.filter(queries)
+            except:
+                products = Info.objects.all()
 
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "No Pokemon name entered")
                 return redirect(reverse('products'))
 
             queries = Q(name__icontains=query) 
             products = products.filter(queries)
 
+        if 'page_no' in request.GET:
+            page = int(request.GET['page_no'])
+
+    min_entry = (page-1)*products_per_page
+    max_entry = page*products_per_page
+    max_pages = math.ceil(len(products)/products_per_page)
+
     context = {
         'products': products,
         'search_term': query,
+        'min_entry': min_entry,
+        'max_entry': max_entry,
+        'max_pages': max_pages,
+        'category_no': categories,
     }
 
     return render(request, 'products/products.html', context)
