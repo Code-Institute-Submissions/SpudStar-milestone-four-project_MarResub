@@ -10,46 +10,61 @@
                 <div class="row">
                     <!-- Displays all the products filtered by the goods views.py category -->
                     {% for product in products %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 py-2 text-dark">
-                            <div class="card h-100">
-                                <!-- Checks to see if the pokemons pokedex number has an image, and gives the default if not -->
-                                <a href="{% url 'product_detail' product.id %}" class="bg-secondary" aria-label="Get more details on the current pokemon: {{ product.name }}">
-                                    <img class=" img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}">
-                                    
-                                </a>
-                                <div class="card-body p-0">
-                                    <div class = "row my-2 text-center">
-                                        <h4 class="mb-0 col">{{ product.name }} Lvl: {{ product.level }}</h4>
-                                    </div>
-                                    <div class = "row text-center py-2">
-                                        <ul class="list-inline list-unstyled text-center m-auto">
-                                            <li class="list-inline-item p-0 m-0">
-                                              <a href="{% url 'products' %}?category={{ product.type1.pk }}" aria-label="Filter by {{ product.name }}'s first type: {{ product.type1 }}">
-                                                <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
-                                              </a>
-                                            </li>
-                                            <!-- Checks to see if the pokemon has a second type and only creates a link if so -->
-                                            {% ifnotequal 19 product.type2.pk %}
-                                            <li class="list-inline-item p-0 m-0">
-                                                <a href="{% url 'products' %}?category={{ product.type2.pk }} " aria-label="Filter by {{ product.name }}'s second type: {{ product.type2 }}">
-                                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
+                        {% if forloop.counter <= max_entry and forloop.counter > min_entry %}
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 py-2 text-dark">
+                                <div class="card h-100">
+                                    <!-- Checks to see if the pokemons pokedex number has an image, and gives the default if not -->
+                                    <a href="{% url 'product_detail' product.id %}" class="bg-secondary" aria-label="Get more details on the current pokemon: {{ product.name }}">
+                                        <img class=" img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}">
+                                        
+                                    </a>
+                                    <div class="card-body p-0">
+                                        <div class = "row my-2 text-center">
+                                            <h4 class="mb-0 col">{{ product.name }} Lvl: {{ product.level }}</h4>
+                                        </div>
+                                        <div class = "row text-center py-2">
+                                            <ul class="list-inline list-unstyled text-center m-auto">
+                                                <li class="list-inline-item p-0 m-0">
+                                                <a href="{% url 'products' %}?category={{ product.type1.pk }}" aria-label="Filter by {{ product.name }}'s first type: {{ product.type1 }}">
+                                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
                                                 </a>
-                                            </li>
-                                            {% endifnotequal %}
-                                        </ul>
+                                                </li>
+                                                <!-- Checks to see if the pokemon has a second type and only creates a link if so -->
+                                                {% ifnotequal 19 product.type2.pk %}
+                                                <li class="list-inline-item p-0 m-0">
+                                                    <a href="{% url 'products' %}?category={{ product.type2.pk }} " aria-label="Filter by {{ product.name }}'s second type: {{ product.type2 }}">
+                                                        <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
+                                                    </a>
+                                                </li>
+                                                {% endifnotequal %}
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Displays who owns the pokemon -->
-                                <div class="card-footer bg-white pt-1 border-0 text-center">
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="lead mb-0 text-center font-weight-bold">Owner: {{ product.owner_profile }}</p>
+                                    <!-- Displays who owns the pokemon -->
+                                    <div class="card-footer bg-white pt-1 border-0 text-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="lead mb-0 text-center font-weight-bold">Owner: {{ product.owner_profile }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
+                </div>
+                <div class="row">
+                    <div class = "col-12">
+                        <div class="row">
+                            {% with ''|center:max_pages as range %}
+                                {% for _ in range %}
+                                    <div class="col">
+                                        <a href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
+                                    </div>
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
