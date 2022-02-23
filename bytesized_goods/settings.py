@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from google.oauth2 import service_account
+# from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'profiles',
     # For Forms
     'crispy_forms',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -176,6 +177,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+"""
 if "USE_CLOUD" in os.environ:
 
     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
@@ -191,7 +193,21 @@ if "USE_CLOUD" in os.environ:
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
         'credentials.json'
     )
+"""
+if "USE_CLOUD" in os.environ:
+    AWS_BUCKET_NAME = os.getenv('BUCKET_KEY', '')
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_BUCKET_NAME}.s3.amazonaws.com'
 
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 # Stripe content
 STRIPE_CURRENCY = 'gbp'
