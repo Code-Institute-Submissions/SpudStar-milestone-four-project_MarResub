@@ -80,8 +80,8 @@
                         </div>
                     </form>
                 {% else %}
+                    <div class="row text-center mb-2"><p class="lead m-auto">Product is added to your bag.</p></div>
                     <div class="row my-3">
-                        <p class="lead mb-5">Product is added to your bag.</p>
                         <div class="col">
                             <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg btn-light">
                                 <span class="icon">
@@ -89,7 +89,7 @@
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
-                            <a href="{% url 'products' %}" class="btn btn-outline-light rounded-0 btn-lg">
+                            <a href="{% url 'bag' %}" class="btn btn-outline-light rounded-0 btn-lg">
                                 <span class="icon">
                                     <i class="fas fa-shopping-bag"></i>
                                 </span>

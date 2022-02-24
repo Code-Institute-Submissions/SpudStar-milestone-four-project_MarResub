@@ -60,7 +60,7 @@ def product_detail(request, product_id):
 
     bag = request.session.get('bag', {})
 
-    if product in list(bag.keys()):
+    if str(product.id) in bag.keys():
         not_in_bag_check = False
 
     context = {
