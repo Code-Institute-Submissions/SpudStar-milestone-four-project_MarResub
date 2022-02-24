@@ -19,13 +19,13 @@
                     <ul class="list-inline list-unstyled text-center m-auto">
                         <li class="list-inline-item p-0 m-0">
                           <a href="{% url 'products' %}?category={{ product.type1.pk }}">
-                            <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
+                            <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
                           </a>
                         </li>
                         {% ifnotequal 19 product.type2.pk %}
                             <li class="list-inline-item p-0 m-0">
                                 <a href="{% url 'products' %}?category={{ product.type2.pk }}">
-                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
+                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}">
                                 </a>
                             </li>
                         {% endifnotequal %}
