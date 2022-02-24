@@ -2,6 +2,7 @@
 This allows for the customer to checkout*/
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1,-1);
 var clientSecret = $('#id_client_secret').text().slice(1,-1);
+console.log(clientSecret);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 
@@ -69,7 +70,7 @@ form.addEventListener('submit', function(ev) {
             $('#submit-button').attr('disabled', false);
         } else {
             if (result.paymentIntent.status === 'succeeded') {
-                form.submit();
+                form.requestSubmit();
             }
         }
     });

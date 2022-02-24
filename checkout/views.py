@@ -18,19 +18,52 @@ import stripe
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    subscription_status = False
+    template = 'checkout/checkout.html'
+    bag = request.session.get('bag', {})
+    order_form = OrderForm()
+    form_data = None
 
-    if request.method == 'POST':
-        bag = request.session.get('bag', {})
+    stripe_total = round(SUBSCRIPTION_COST*100)
+    stripe.api_key = stripe_secret_key
 
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'user_trainer_code': request.POST['user_trainer_code'],
-        }
+    intent = stripe.PaymentIntent.create(
+                    amount=stripe_total,
+                    currency=settings.STRIPE_CURRENCY,
+                )
+
+    # Code to check if user is subscribed already
+    # Checks if there is a current user to avoid errors
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user=request.user)
+        if profile:
+            # Populates the form data with the user's
+            form_data = {
+                'full_name': profile.user,
+                'email': profile.default_email,
+                'user_trainer_code': profile.default_trainer_code,
+            }
+            # Checks if the user is subscribed
+            subscription_status = profile.subscription
+
+    # Runs the complete order code if a form has been submitted, or if 
+    # the user is already subscribed
+    if request.method == 'POST' or subscription_status:
+
+        if request.user.is_authenticated and not subscription_status:
+            # Saves the user as subscribed if logged in and not subscribed
+            profile = get_object_or_404(UserProfile, user=request.user)
+            profile.subscription = True
+            profile.save()
+        else:
+            form_data = {
+                'full_name': request.POST['full_name'],
+                'email': request.POST['email'],
+                'user_trainer_code': request.POST['user_trainer_code'],
+            }
 
         order_form = OrderForm(form_data)
 
-        # If the form is valid, creates an order
         if order_form.is_valid():
             order = order_form.save()
             for item_id, item_data in bag.items():
@@ -48,22 +81,12 @@ def checkout(request):
 
             return redirect(reverse('checkout_success',
                             args=[order.order_number]))
-    else:
-        bag = request.session.get('bag', {})
-        if not bag:
-            return redirect(reverse('products'))
+        else:
+            bag = request.session.get('bag', {})
+            if not bag:
+                return redirect(reverse('products'))
 
         order_form = OrderForm()
-
-    stripe_total = round(SUBSCRIPTION_COST*100)
-    stripe.api_key = stripe_secret_key
-
-    intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
-
-    template = 'checkout/checkout.html'
 
     context = {
         'order_form': order_form,
@@ -72,6 +95,7 @@ def checkout(request):
     }
 
     return render(request, template, context)
+
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
