@@ -21,6 +21,7 @@ def checkout(request):
     subscription_status = False
     client_secret_value = None
     template = 'checkout/checkout.html'
+    bag = request.session.get('bag', {})
 
     # Checks if there is a current user
     if request.user.is_authenticated:
@@ -39,7 +40,6 @@ def checkout(request):
     if not subscription_status:
 
         if request.method == 'POST':
-            bag = request.session.get('bag', {})
 
             # If it is a guest user, saves the form data
             if not request.user.is_authenticated:
