@@ -24,12 +24,6 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
-        form_data = {
-                'full_name': request.POST['full_name'],
-                'email': request.POST['email'],
-                'user_trainer_code': request.POST['user_trainer_code'],
-            }
-
         if request.user.is_authenticated:
             profile = get_object_or_404(UserProfile, user=request.user)
             if profile:
@@ -39,6 +33,12 @@ def checkout(request):
                     'user_trainer_code': profile.default_trainer_code,
                 }
                 subscription_status = profile.subscription
+        else:
+            form_data = {
+                'full_name': request.POST['full_name'],
+                'email': request.POST['email'],
+                'user_trainer_code': request.POST['user_trainer_code'],
+            }
 
         if not subscription_status:
             stripe_total = round(SUBSCRIPTION_COST*100)
