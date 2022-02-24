@@ -31,6 +31,8 @@ def checkout(request):
                     currency=settings.STRIPE_CURRENCY,
                 )
 
+    console.log(intent.client_secret)
+    console.log(stripe_public_key)
     # Code to check if user is subscribed already
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
