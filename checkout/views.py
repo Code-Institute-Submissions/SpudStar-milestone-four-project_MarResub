@@ -18,29 +18,39 @@ import stripe
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    subscription_status = True
+    subscription_status = False
     client_secret_value = None
+    template = 'checkout/checkout.html'
 
-    if request.method == 'POST':
-        bag = request.session.get('bag', {})
-
-        if request.user.is_authenticated:
-            profile = get_object_or_404(UserProfile, user=request.user)
-            if profile:
-                form_data = {
-                    'full_name': profile.user,
-                    'email': profile.default_email,
-                    'user_trainer_code': profile.default_trainer_code,
-                }
-                subscription_status = profile.subscription
-        else:
+    # Checks if there is a current user
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user=request.user)
+        if profile:
+            # Populates the form data with the user's
             form_data = {
-                'full_name': request.POST['full_name'],
-                'email': request.POST['email'],
-                'user_trainer_code': request.POST['user_trainer_code'],
+                'full_name': profile.user,
+                'email': profile.default_email,
+                'user_trainer_code': profile.default_trainer_code,
             }
+            # Checks if the user is subscribed
+            subscription_status = profile.subscription
 
-        if not subscription_status:
+    # Checks if the person needs to pay anything
+    if not subscription_status:
+
+        if request.method == 'POST':
+            bag = request.session.get('bag', {})
+
+            # If it is a guest user, saves the form data
+            if not request.user.is_authenticated:
+                form_data = {
+                    'full_name': request.POST['full_name'],
+                    'email': request.POST['email'],
+                    'user_trainer_code': request.POST['user_trainer_code'],
+                }
+
+            # Creates the intent to pay the subscription
+
             stripe_total = round(SUBSCRIPTION_COST*100)
             stripe.api_key = stripe_secret_key
 
@@ -49,12 +59,17 @@ def checkout(request):
                     currency=settings.STRIPE_CURRENCY,
                 )
             client_secret_value = intent.client_secret
-            profile.subscription = True
-            profile.save()
 
-        order_form = OrderForm(form_data)
+            # Saves the user as subscribed if logged in
+            if request.user.is_authenticated:
+                profile = get_object_or_404(UserProfile, user=request.user)
+                profile.subscription = True
+                profile.save()
 
+    
+    if subscription_status or request.method == 'POST':
         # If the form is valid, creates an order
+        order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save()
             for item_id, item_data in bag.items():
@@ -70,16 +85,14 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
-            return redirect(reverse('checkout_success',
-                            args=[order.order_number]))
-    else:
-        bag = request.session.get('bag', {})
-        if not bag:
-            return redirect(reverse('products'))
+                return redirect(reverse('checkout_success',
+                                args=[order.order_number]))
+        else:
+            bag = request.session.get('bag', {})
+            if not bag:
+                return redirect(reverse('products'))
 
         order_form = OrderForm()
-
-    template = 'checkout/checkout.html'
 
     context = {
         'order_form': order_form,

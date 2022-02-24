@@ -8,6 +8,7 @@
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
+            <!-- Only displays details form if the user is a guest -->
             {% if not request.user.is_authenticated %}
                 <fieldset>
                     <legend>Your Details</legend>
@@ -16,11 +17,14 @@
                     {{ order_form.user_trainer_code | as_crispy_field }}
                 </fieldset>
             {% endif %}
+            <!-- Only displays card input if the user still needs to pay for subscription -->
+            {% if not user_subscribed %}
             <fieldset>
                     <legend>Payment Information</legend>
                     <div id="card-element"></div>
                     <div id="card-error-message"></div>
             </fieldset>
+            {% endif %}
             <div class="mt-4">
                 <!-- Button to finish the order -->
                 <button id='submit-button' class='btn btn-outline-light'>
@@ -33,9 +37,7 @@
 
 <!-- Link to script for checkout -->
 {% block postloadjs %}
-    {% if not client_secret == None %}
         {{ stripe_public_key | json_script:"id_stripe_public_key"}}
         {{ client_secret | json_script:"id_client_secret"}}
         <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
-    {% endif %}
 {% endblock %}

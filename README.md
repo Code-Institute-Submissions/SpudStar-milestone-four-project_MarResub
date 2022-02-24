@@ -1,12 +1,11 @@
 
 # ByteSized Trades
 ## A Full Stack Development Project by Edward Stanley
-Bytesized Trades is a website with one goal in mind, to give players of the game 'Pokemon' a forum in which they can request pokemon they want added to their team. 
+Bytesized Trades is a website with one goal in mind, to give players of the game 'Pokemon' a forum in which they can request pokemon they want added to their team. It utilises a one time subscription based system allowing users to only pay once to send pokemon requests on checkout. Pokemon is a popular game by Nintendo with the main mechanics being catching and levelling up pokemon for battle. Another important part is pokemon trading, specifically with other people who own the game. However Nintendo has taken down the ability to find people to trade with for older games hence this website seeks to create a new platform for players to do so. 
 
-The current setup of the site is that the owner holds a database worth of pokemon they are looking to trade off, so instead of asking around aimlessly, those trainers now come to him. The website has the ability for the owner to add pokemon, edit them, and delete them if they no longer exist.
+The current setup of the site is that the owner holds a database worth of pokemon they are looking to trade off, so instead of asking around aimlessly, those trainers now come to him. The website has the ability for the owner to add pokemon, edit them, and delete them if they no longer exist. As each pokemon is unique, the website doesn't focus on quantity but rather the handling of multiple types of similar pokemon.
 
-The users are able to access the website anomynously, or create an account which gets verified by email, and add pokemon they want to request to the bag. Due to the nature of this, the same id pokemon cannot be added by the user twice as that would be redundant. 
-The user can then checkout those pokemon by providing their own trainer code and email (Else the user would have no way to communicate with them to trade).
+The users are able to access the website anomynously, or create an account which gets verified by email, and add pokemon they want to request to the bag. Due to the nature of this, the same id pokemon cannot be added by the user twice as there is essentially one copy of each. Once the subscription has been paid, the user can then checkout those pokemon by providing their own trainer code and email (Else the user would have no way to communicate with them to trade).
 #
 ## User Stories
 ### The Owner -
@@ -19,7 +18,6 @@ The user can then checkout those pokemon by providing their own trainer code and
     - Wants to have access to the full database of pokemon available
     - Wants to be able to filter out the pokemon to better find the ones they want
     - Wants to be able to sign up to the website, and have an email sent to them for validation
-    - Wants to be greeted with a success page on complete checkout, and be updated if their checkout details are invalid on submission
     - Shouldn't be able to access the log out or profile page
 
 ### The Authorized user -
@@ -156,8 +154,6 @@ Whilst the majority of the user GUI experience is nicely laid out and centered a
 - The user is able to filter by name and type to better find which pokemon they want, ideally in future they can also sort by the specific stats such as hp - highest to lowest
 ##### *" Wants to be able to sign up to the website, and have an email sent to them for validation"*
 - Using Allauth, the website has full validation allowing users to make accounts safely, as well as receive a validation email
-##### *" Wants to be greeted with a success page on complete checkout, and be updated if their checkout details are invalid on submission"*
-- On a sucessful purchase, the user is greeted with a success screen with a breakdown of their order, If the form fails to validate the form will ask the user to fill the specific section out again. Stripe also is able to check validation with cards ensuring the card itself is correct.
 ##### *" Shouldn't be able to access the log out or profile page via nav menu"*
 - The code checks if a user is logged in, and automatically hides any links bar the log in and sign up 
 
