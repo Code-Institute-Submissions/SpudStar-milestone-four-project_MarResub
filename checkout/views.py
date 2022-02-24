@@ -37,6 +37,9 @@ def checkout(request):
             # Checks if the user is subscribed
             subscription_status = profile.subscription
 
+    if subscription_status:
+        return redirect(reverse('products'))
+
     # Checks if the person needs to pay anything
     if not subscription_status:
 
