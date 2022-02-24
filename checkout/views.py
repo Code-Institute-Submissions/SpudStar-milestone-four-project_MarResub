@@ -18,15 +18,26 @@ import stripe
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    subscription_status = False
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'user_trainer_code': request.POST['user_trainer_code'],
-        }
+        profile = get_object_or_404(UserProfile, user=request.user)
+
+        if profile:
+            form_data = {
+                'full_name': profile.user,
+                'email': profile.default_email,
+                'user_trainer_code': profile.default_trainer_code,
+            }
+            subscription_status = profile.subscription
+        else:
+            form_data = {
+                'full_name': request.POST['full_name'],
+                'email': request.POST['email'],
+                'user_trainer_code': request.POST['user_trainer_code'],
+            }
 
         order_form = OrderForm(form_data)
 
@@ -55,13 +66,14 @@ def checkout(request):
 
         order_form = OrderForm()
 
-    stripe_total = round(SUBSCRIPTION_COST*100)
-    stripe.api_key = stripe_secret_key
+    if not subscription_status:
+        stripe_total = round(SUBSCRIPTION_COST*100)
+        stripe.api_key = stripe_secret_key
 
-    intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
+        intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+            )
 
     template = 'checkout/checkout.html'
 

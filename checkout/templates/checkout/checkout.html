@@ -8,18 +8,22 @@
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
-            <fieldset>
-                <legend>Your Details</legend>
-                {{ order_form.full_name | as_crispy_field }}
-                {{ order_form.email | as_crispy_field }}
-                {{ order_form.user_trainer_code | as_crispy_field }}
-            </fieldset>
-            <fieldset>
-                    <legend>Payment Information</legend>
-                    <div id="card-element"></div>
-                    <div id="card-error-message"></div>
-                    <h6>Note: requests cost £4.99 per checkout so please add all your pokemon first!</h6>
-            </fieldset>
+            {% if request.user.is_authenticated %}
+                <fieldset>
+                    <legend>Your Details</legend>
+                    {{ order_form.full_name | as_crispy_field }}
+                    {{ order_form.email | as_crispy_field }}
+                    {{ order_form.user_trainer_code | as_crispy_field }}
+                </fieldset>
+            {% endif %}
+            {% if not user_subscribed %}
+                <fieldset>
+                        <legend>Payment Information</legend>
+                        <div id="card-element"></div>
+                        <div id="card-error-message"></div>
+                        <h6>Note: requests cost £4.99 per checkout so please add all your pokemon first!</h6>
+                </fieldset>
+            {% endif %}
             <div class="mt-4">
                 <!-- Button to finish the order -->
                 <button id='submit-button' class='btn btn-outline-light'>
