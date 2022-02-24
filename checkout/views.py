@@ -19,6 +19,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     subscription_status = False
+    client_secret_value = None
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
@@ -47,6 +48,7 @@ def checkout(request):
                         amount=stripe_total,
                         currency=settings.STRIPE_CURRENCY,
                     )
+                client_secret_value = intent.client_secret
                 profile.subscription = True
                 profile.save()
 
@@ -82,7 +84,7 @@ def checkout(request):
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
+        'client_secret': client_secret_value,
     }
 
     return render(request, template, context)
