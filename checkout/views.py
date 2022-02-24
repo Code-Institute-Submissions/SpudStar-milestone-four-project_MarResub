@@ -24,6 +24,12 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
+        form_data = {
+                'full_name': request.POST['full_name'],
+                'email': request.POST['email'],
+                'user_trainer_code': request.POST['user_trainer_code'],
+            }
+
         if request.user.is_authenticated:
             profile = get_object_or_404(UserProfile, user=request.user)
             if profile:
@@ -33,24 +39,18 @@ def checkout(request):
                     'user_trainer_code': profile.default_trainer_code,
                 }
                 subscription_status = profile.subscription
-            else:
-                form_data = {
-                    'full_name': request.POST['full_name'],
-                    'email': request.POST['email'],
-                    'user_trainer_code': request.POST['user_trainer_code'],
-                }
 
-            if not subscription_status:
-                stripe_total = round(SUBSCRIPTION_COST*100)
-                stripe.api_key = stripe_secret_key
+        if not subscription_status:
+            stripe_total = round(SUBSCRIPTION_COST*100)
+            stripe.api_key = stripe_secret_key
 
-                intent = stripe.PaymentIntent.create(
-                        amount=stripe_total,
-                        currency=settings.STRIPE_CURRENCY,
-                    )
-                client_secret_value = intent.client_secret
-                profile.subscription = True
-                profile.save()
+            intent = stripe.PaymentIntent.create(
+                    amount=stripe_total,
+                    currency=settings.STRIPE_CURRENCY,
+                )
+            client_secret_value = intent.client_secret
+            profile.subscription = True
+            profile.save()
 
         order_form = OrderForm(form_data)
 
@@ -85,6 +85,7 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': client_secret_value,
+        'user_subscribed':subscription_status,
     }
 
     return render(request, template, context)
