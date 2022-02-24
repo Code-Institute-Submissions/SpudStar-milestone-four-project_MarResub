@@ -8,16 +8,6 @@
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
-            <!-- Only displays details form if the user is a guest -->
-            {% if not request.user.is_authenticated %}
-                <fieldset>
-                    <legend>Your Details</legend>
-                    {{ order_form.full_name | as_crispy_field }}
-                    {{ order_form.email | as_crispy_field }}
-                    {{ order_form.user_trainer_code | as_crispy_field }}
-                </fieldset>
-            {% endif %}
-            <!-- Only displays card input if the user still needs to pay for subscription -->
             <fieldset>
                     <legend>Payment Information</legend>
                     <div id="card-element"></div>
