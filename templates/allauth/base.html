@@ -207,6 +207,15 @@
     </header>
 
     <div class = "nav-offset container-fluid text-center hero-container">
+      {% if messages %}
+        <div>
+          <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
       {% block content %}
       {% endblock %}
     </div>

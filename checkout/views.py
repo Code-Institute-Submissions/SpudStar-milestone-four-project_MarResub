@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.conf import settings
+from django.contrib import messages
 
 from goods.models import Info
 from profiles.models import UserProfile
@@ -31,8 +32,6 @@ def checkout(request):
                     currency=settings.STRIPE_CURRENCY,
                 )
 
-    print(intent.client_secret)
-    print(stripe_public_key)
     # Code to check if user is subscribed already
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
@@ -48,12 +47,14 @@ def checkout(request):
             # Checks if the user is subscribed
             subscription_status = profile.subscription
 
-        # Runs the complete order code if a form has been submitted, or if 
+        # Runs the complete order code if a form has been submitted, or if
         # the user is already subscribed
         if request.method == 'POST' or subscription_status:
 
             if not subscription_status:
                 # Saves the user as subscribed if logged in and not subscribed
+                messages.success(request,
+                                 'You have now subscribed to our service.')
                 profile = get_object_or_404(UserProfile, user=request.user)
                 profile.subscription = True
                 profile.save()
@@ -74,19 +75,22 @@ def checkout(request):
                     # If a pokemon somehow doesn't exist, returns to bag
                     except Info.DoesNotExist:
                         order.delete()
-                        return redirect(reverse('view_bag'))
+                        messages.error(request, 
+                                       'There was an error with a pokemon')
+                        return redirect(reverse('bag'))
 
                 return redirect(reverse('checkout_success',
                                 args=[order.order_number]))
             else:
                 bag = request.session.get('bag', {})
+                messages.error(request, 'There is an error with your details.')
                 if not bag:
                     return redirect(reverse('products'))
 
             order_form = OrderForm()
-            return redirect(reverse('products'))
     else:
-        return redirect(reverse('home'))
+        messages.error(request, 'You must be logged in to submit requests.')
+        return redirect(reverse('bag'))
 
     context = {
         'stripe_public_key': stripe_public_key,

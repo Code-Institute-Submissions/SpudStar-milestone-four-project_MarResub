@@ -83,6 +83,7 @@ def add_product(request):
         # Checks to see if the pokemon info is valid
         if form.is_valid():
             form.save()
+            messages.success(request, 'Pokemon Added Successfully.')
             return redirect(reverse('add_product'))
     else:
         form = ProductForm()
@@ -108,6 +109,7 @@ def edit_product(request, product_id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Pokemon Edited Successfully.')
             return redirect(reverse('product_detail', args=[product.id]))
     else:
         form = ProductForm(instance=product)
@@ -129,4 +131,5 @@ def delete_product(request, product_id):
 
     product = get_object_or_404(Info, pk=product_id)
     product.delete()
+    messages.success(request, 'Pokemon Deleted Successfully.')
     return redirect(reverse('products'))
