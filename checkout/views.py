@@ -24,7 +24,7 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             profile = get_object_or_404(UserProfile, user=request.user)
             if profile:
                 form_data = {
