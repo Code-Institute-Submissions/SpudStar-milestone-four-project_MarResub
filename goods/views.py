@@ -56,9 +56,17 @@ def all_products(request):
 def product_detail(request, product_id):
 
     product = get_object_or_404(Info, pk=product_id)
+    not_in_bag_check = True
+
+    bag = request.session.get('bag', {})
+
+    if product.id not in list(bag.keys()):
+        bag[item_id] = 1
+        not_in_bag_check = False
 
     context = {
         'product': product,
+        'not_in_bag': not_in_bag_check,
     }
 
     return render(request, 'products/product_detail.html', context)
