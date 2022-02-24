@@ -18,7 +18,7 @@ import stripe
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    subscription_status = False
+    subscription_status = True
     client_secret_value = None
 
     if request.method == 'POST':
