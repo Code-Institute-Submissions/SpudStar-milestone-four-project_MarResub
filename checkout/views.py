@@ -23,21 +23,21 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
-        profile = get_object_or_404(UserProfile, user=request.user)
-
-        if profile:
-            form_data = {
-                'full_name': profile.user,
-                'email': profile.default_email,
-                'user_trainer_code': profile.default_trainer_code,
-            }
-            subscription_status = profile.subscription
-        else:
-            form_data = {
-                'full_name': request.POST['full_name'],
-                'email': request.POST['email'],
-                'user_trainer_code': request.POST['user_trainer_code'],
-            }
+        if request.user.is_authenticated():
+            profile = get_object_or_404(UserProfile, user=request.user)
+            if profile:
+                form_data = {
+                    'full_name': profile.user,
+                    'email': profile.default_email,
+                    'user_trainer_code': profile.default_trainer_code,
+                }
+                subscription_status = profile.subscription
+            else:
+                form_data = {
+                    'full_name': request.POST['full_name'],
+                    'email': request.POST['email'],
+                    'user_trainer_code': request.POST['user_trainer_code'],
+                }
 
         order_form = OrderForm(form_data)
 

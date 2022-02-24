@@ -8,7 +8,7 @@
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
-            {% if request.user.is_authenticated %}
+            {% if not request.user.is_authenticated %}
                 <fieldset>
                     <legend>Your Details</legend>
                     {{ order_form.full_name | as_crispy_field }}
