@@ -58,6 +58,12 @@ input.searchbar{
     width:100%;
 }
 
+.hero-container {
+    background: url("/media/bytesizebackground.png");
+    background-repeat: repeat;
+    padding: 0;
+}
+
 /* CSS for product display */
 tr{
     background-color: #2d3035;
