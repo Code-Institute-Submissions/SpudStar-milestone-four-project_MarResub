@@ -80,12 +80,14 @@ def checkout(request):
         order_form = OrderForm()
 
     template = 'checkout/checkout.html'
+    if subscription_status:
+        template = 'checkout/checkout_success.html'
 
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': client_secret_value,
-        'user_subscribed':subscription_status,
+        'user_subscribed': subscription_status,
     }
 
     return render(request, template, context)
