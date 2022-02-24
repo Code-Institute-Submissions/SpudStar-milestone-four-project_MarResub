@@ -9,7 +9,7 @@ def bag_contents(request):
 
     bag_items = []
     product_count = 0
-    
+
     # gets the users current session
     bag = request.session.get('bag', {})
 

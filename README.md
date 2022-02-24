@@ -113,7 +113,11 @@ They would only be able to delete and edit their own. This wasnt implemented due
 - Despite to the majority of the code for this coming from Stripe, I ran the stripe_elements.js through the validator regardless. No errors to note came about
 
 ### Flake 8
-- I used Flake 8 to identify the vast majority of issues with the python code, There ended up being a lot purely due to python being very specific about indentation, line length, and whitespace. I resolved the vase majority of these issues, but was forced to leave some errors such as long strings of text in settings.py
+- I used Flake 8 to identify the vast majority of issues with the python code, There ended up being a lot purely due to python being very specific about indentation, line length, and whitespace.
+
+### PEP8
+- I also used PEP8 to validate the python code to catch anything Flake8 missed.
+
 
 ### Lighthouse Validation
 ![webiste](read_me_resources/lighthouse.png)

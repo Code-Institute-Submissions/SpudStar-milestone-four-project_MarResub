@@ -5,8 +5,8 @@ from .models import Info
 from .forms import ProductForm
 import math
 
-
 # Filters products based on the either the pokemons type, or name
+
 
 def all_products(request):
 
@@ -23,7 +23,7 @@ def all_products(request):
             queries = Q(type1=categories) | Q(type2=categories)
             try:
                 products = products.filter(queries)
-            except:
+            except TypeError:
                 products = Info.objects.all()
 
         if 'q' in request.GET:
@@ -31,7 +31,7 @@ def all_products(request):
             if not query:
                 return redirect(reverse('products'))
 
-            queries = Q(name__icontains=query) 
+            queries = Q(name__icontains=query)
             products = products.filter(queries)
 
         if 'page_no' in request.GET:
@@ -87,7 +87,7 @@ def add_product(request):
             return redirect(reverse('add_product'))
     else:
         form = ProductForm()
-        
+
     template = 'products/add_product.html'
     context = {
         'form': form,

@@ -33,9 +33,9 @@ class Info(models.Model):
     # be implemented in the future
     abilities = models.CharField(max_length=100)
 
-    type1 = models.ForeignKey('Category', null=True, blank=True, 
+    type1 = models.ForeignKey('Category', null=True, blank=True,
                               on_delete=models.SET_NULL)
-    type2 = models.ForeignKey('Category', null=True, blank=True, 
+    type2 = models.ForeignKey('Category', null=True, blank=True,
                               on_delete=models.SET_NULL, related_name='typ2')
 
     hp = models.IntegerField(null=True, blank=True)

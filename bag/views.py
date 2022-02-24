@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, reverse, HttpResponse
 from django.contrib import messages
 
 # Function that returns the current bag view
+
+
 def bag(request):
     return render(request, 'bag/bag.html')
 
