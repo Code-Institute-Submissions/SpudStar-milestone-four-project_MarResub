@@ -16,7 +16,6 @@
                                     <!-- Checks to see if the pokemons pokedex number has an image, and gives the default if not -->
                                     <a href="{% url 'product_detail' product.id %}" class="bg-secondary" aria-label="Get more details on the current pokemon: {{ product.name }}">
                                         <img class=" img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}">
-                                        
                                     </a>
                                     <div class="card-body p-0">
                                         <div class = "row my-2 text-center">
@@ -24,18 +23,16 @@
                                         </div>
                                         <div class = "row text-center py-2">
                                             <ul class="list-inline list-unstyled text-center m-auto">
-                                                <li class="list-inline-item p-0 m-0">
-                                                <a href="{% url 'products' %}?category={{ product.type1.pk }}" aria-label="Filter by {{ product.name }}'s first type: {{ product.type1 }}">
-                                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
-                                                </a>
-                                                </li>
+                                                {% ifnotequal 19 product.type1.pk %}
+                                                    <li class="list-inline-item p-0 m-0">
+                                                        <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
+                                                    </li>
+                                                {% endifnotequal %}
                                                 <!-- Checks to see if the pokemon has a second type and only creates a link if so -->
                                                 {% ifnotequal 19 product.type2.pk %}
-                                                <li class="list-inline-item p-0 m-0">
-                                                    <a href="{% url 'products' %}?category={{ product.type2.pk }} " aria-label="Filter by {{ product.name }}'s second type: {{ product.type2 }}">
-                                                        <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
-                                                    </a>
-                                                </li>
+                                                    <li class="list-inline-item p-0 m-0">
+                                                            <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
+                                                    </li>
                                                 {% endifnotequal %}
                                             </ul>
                                         </div>
@@ -59,12 +56,16 @@
                             {% with ''|center:max_pages as range %} <!-- Code to iterate numerical loops in DJango Templates from https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
                                 {% for _ in range %}
                                     {% if forloop.counter|divisibleby:2 %}
-                                        <li class="list-inline-item page-style-even page-style clickable">
-                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
+                                        <li class="list-inline-item">
+                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}">
+                                                <span class="page-style-even page-style clickable">{{ forloop.counter }}</span>
+                                            </a>
                                         </li>
                                     {% else %}
-                                        <li class="list-inline-item page-style-odd page-style clickable">
-                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
+                                        <li class="list-inline-item">
+                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}">
+                                                <span class="page-style-even page-style clickable">{{ forloop.counter }}</span>
+                                            </a>
                                         </li>
                                     {% endif %}
                                 {% endfor %}
