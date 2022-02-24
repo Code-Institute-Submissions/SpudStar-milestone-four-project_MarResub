@@ -82,8 +82,9 @@ def checkout(request):
                     return redirect(reverse('products'))
 
             order_form = OrderForm()
+            return redirect(reverse('products'))
     else:
-        return redirect(reverse('home'))
+        return redirect(reverse('bag'))
 
     context = {
         'stripe_public_key': stripe_public_key,
