@@ -21,6 +21,7 @@ def checkout(request):
     subscription_status = False
     template = 'checkout/checkout.html'
     form_data = None
+    user_profile = None
 
     stripe_total = round(SUBSCRIPTION_COST*100)
     stripe.api_key = stripe_secret_key
@@ -34,6 +35,7 @@ def checkout(request):
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user=request.user)
+        user_profile = profile
         if profile:
             # Populates the form data with the user's
             form_data = {
@@ -81,11 +83,12 @@ def checkout(request):
 
             order_form = OrderForm()
     else:
-        return redirect(reverse('view_bag'))
+        return redirect(reverse('home'))
 
     context = {
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'user_details': user_profile,
     }
 
     return render(request, template, context)

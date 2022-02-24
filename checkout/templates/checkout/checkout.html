@@ -8,10 +8,14 @@
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
+            <div class="mt-4">
+                <legend>Your Details</legend>
+                <p>user_details</p>
+            </div>
             <fieldset>
-                    <legend>Payment Information</legend>
-                    <div id="card-element"></div>
-                    <div id="card-error-message"></div>
+                <legend>Payment Information</legend>
+                <div id="card-element"></div>
+                <div id="card-error-message"></div>
             </fieldset>
             <div class="mt-4">
                 <!-- Button to finish the order -->
