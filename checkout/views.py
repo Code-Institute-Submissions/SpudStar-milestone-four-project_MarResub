@@ -40,7 +40,6 @@ def checkout(request):
 
     # Checks if the person needs to pay anything
     if not subscription_status:
-
         if request.method == 'POST':
 
             # If it is a guest user, saves the form data
@@ -87,8 +86,8 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_bag'))
 
-                return redirect(reverse('checkout_success',
-                                args=[order.order_number]))
+            return redirect(reverse('checkout_success',
+                            args=[order.order_number]))
         else:
             bag = request.session.get('bag', {})
             if not bag:
