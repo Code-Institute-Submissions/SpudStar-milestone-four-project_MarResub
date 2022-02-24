@@ -20,6 +20,7 @@ def profile(request):
     context = {
         'form': form,
         'orders': orders,
+        'subscription': profiles.subscription,
     }
 
     return render(request, 'profiles/profile.html', context)

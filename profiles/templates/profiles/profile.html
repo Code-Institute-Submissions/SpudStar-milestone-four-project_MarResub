@@ -19,6 +19,11 @@
                     {{ form|crispy }}
                     <button class="btn btn-light rounded-0 text-uppercase float-right">Update Information</button>
                 </form>
+                {% if subscription %}
+                    <p class="text-muted">You have subscribed to this service!</p>
+                {% else %}
+                    <p class="text-muted">You will need to pay the £4.99 subscription on checkout</p>
+                {% endif %}
             </div>
             <div class="col-12 col-lg-6">
                 <p class="text-muted">Order History</p>
