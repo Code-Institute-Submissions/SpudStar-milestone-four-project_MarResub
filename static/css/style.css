@@ -66,7 +66,7 @@ tr{
     height:100%;
 }
 
-/* TEMP CLASSES FROM MILESTONE 3 TO TEST PRODUCT DETAIL FOR STUFF */
+/* Classes repurposed from milestone 3 to display pokemon stat values */
 .card-container{
     border-radius: 3px;
     border: solid rgb(0, 0, 0) 5px;
@@ -95,4 +95,22 @@ tr{
     height:20px;
     margin:0;
     margin-bottom:10px;
+}
+
+/* Styling for page buttons */
+.page-style{
+    height:35px;
+    width:30px;
+    margin:0;
+    margin-bottom: 10px;
+}
+
+.page-style-odd{
+    border: solid rgb(252, 252, 252) 1px;
+    background-color: #2b2b2b;
+}
+
+.page-style-even{
+    border: solid rgb(196, 196, 196) 1px;
+    background-color: #303030;
 }

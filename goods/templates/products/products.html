@@ -55,15 +55,21 @@
                 </div>
                 <div class="row">
                     <div class = "col-12">
-                        <div class="row">
-                            {% with ''|center:max_pages as range %}
+                        <ul class="list-inline">
+                            {% with ''|center:max_pages as range %} <!-- Code to iterate numerical loops in DJango Templates from https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
                                 {% for _ in range %}
-                                    <div class="col">
-                                        <a href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
-                                    </div>
+                                    {% if forloop.counter|divisibleby:2 %}
+                                        <li class="list-inline-item page-style-even page-style">
+                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
+                                        </li>
+                                    {% else %}
+                                        <li class="list-inline-item page-style-odd page-style">
+                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
+                                        </li>
+                                    {% endif %}
                                 {% endfor %}
                             {% endwith %}
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>
