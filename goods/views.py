@@ -61,7 +61,6 @@ def product_detail(request, product_id):
     bag = request.session.get('bag', {})
 
     if product.id not in list(bag.keys()):
-        bag[item_id] = 1
         not_in_bag_check = False
 
     context = {
