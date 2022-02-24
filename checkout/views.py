@@ -66,10 +66,11 @@ def checkout(request):
                 profile.subscription = True
                 profile.save()
 
+    order_form = OrderForm(form_data)
     
     if subscription_status or request.method == 'POST':
         # If the form is valid, creates an order
-        order_form = OrderForm(form_data)
+        
         if order_form.is_valid():
             order = order_form.save()
             for item_id, item_data in bag.items():
@@ -98,7 +99,6 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': client_secret_value,
-        'user_subscribed': subscription_status,
     }
 
     return render(request, template, context)
