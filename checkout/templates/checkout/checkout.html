@@ -16,14 +16,11 @@
                     {{ order_form.user_trainer_code | as_crispy_field }}
                 </fieldset>
             {% endif %}
-            {% if user_subscribed %}
-                <fieldset>
-                        <legend>Payment Information</legend>
-                        <div id="card-element"></div>
-                        <div id="card-error-message"></div>
-                        <h6>Note: requests cost £4.99 per checkout so please add all your pokemon first!</h6>
-                </fieldset>
-            {% endif %}
+            <fieldset>
+                    <legend>Payment Information</legend>
+                    <div id="card-element"></div>
+                    <div id="card-error-message"></div>
+            </fieldset>
             <div class="mt-4">
                 <!-- Button to finish the order -->
                 <button id='submit-button' class='btn btn-outline-light'>
