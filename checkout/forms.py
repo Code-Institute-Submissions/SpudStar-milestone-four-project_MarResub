@@ -3,6 +3,7 @@ from .models import Order
 
 # The order form setup, uses three fields for the user to fill
 
+
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
