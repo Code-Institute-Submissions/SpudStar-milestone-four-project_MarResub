@@ -88,6 +88,8 @@ def checkout(request):
             bag = request.session.get('bag', {})
             if not bag:
                 return redirect(reverse('products'))
+            return redirect(reverse('checkout_success',
+                            args=[order.order_number]))
 
         order_form = OrderForm()
 
