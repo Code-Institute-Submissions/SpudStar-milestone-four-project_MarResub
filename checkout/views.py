@@ -19,11 +19,18 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     subscription_status = False
-    client_secret_value = None
     template = 'checkout/checkout.html'
     bag = request.session.get('bag', {})
     order_form = OrderForm()
     form_data = None
+
+    stripe_total = round(SUBSCRIPTION_COST*100)
+    stripe.api_key = stripe_secret_key
+
+    intent = stripe.PaymentIntent.create(
+                    amount=stripe_total,
+                    currency=settings.STRIPE_CURRENCY,
+                )
 
     # Checks if there is a current user
     if request.user.is_authenticated:
@@ -49,17 +56,6 @@ def checkout(request):
                     'email': request.POST['email'],
                     'user_trainer_code': request.POST['user_trainer_code'],
                 }
-
-            # Creates the intent to pay the subscription
-
-            stripe_total = round(SUBSCRIPTION_COST*100)
-            stripe.api_key = stripe_secret_key
-
-            intent = stripe.PaymentIntent.create(
-                    amount=stripe_total,
-                    currency=settings.STRIPE_CURRENCY,
-                )
-            client_secret_value = intent.client_secret
 
             # Saves the user as subscribed if logged in
             if request.user.is_authenticated:
@@ -98,7 +94,7 @@ def checkout(request):
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
-        'client_secret': client_secret_value,
+        'client_secret': intent.client_secret,
     }
 
     return render(request, template, context)
