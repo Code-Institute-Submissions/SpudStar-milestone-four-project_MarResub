@@ -60,7 +60,7 @@
                                 {% for _ in range %}
                                     {% if forloop.counter|divisibleby:2 %}
                                         <li class="list-inline-item page-style-even page-style">
-                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
+                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}"><span>{{ forloop.counter }}</span></a>
                                         </li>
                                     {% else %}
                                         <li class="list-inline-item page-style-odd page-style">

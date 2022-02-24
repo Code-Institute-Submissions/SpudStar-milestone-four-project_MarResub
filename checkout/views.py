@@ -32,7 +32,8 @@ def checkout(request):
                     currency=settings.STRIPE_CURRENCY,
                 )
 
-    # Checks if there is a current user
+    # Code to check if user is subscribed already
+    # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user=request.user)
         if profile:
@@ -46,25 +47,20 @@ def checkout(request):
             subscription_status = profile.subscription
 
     # Checks if the person needs to pay anything
-    if not subscription_status:
-        if request.method == 'POST':
+    if request.method == 'POST' or subscription_status:
 
-            # If it is a guest user, saves the form data
-            if not request.user.is_authenticated:
-                form_data = {
-                    'full_name': request.POST['full_name'],
-                    'email': request.POST['email'],
-                    'user_trainer_code': request.POST['user_trainer_code'],
-                }
+        if request.user.is_authenticated and not subscription_status:
+            # Saves the user as subscribed if logged in and not subscribed
+            profile = get_object_or_404(UserProfile, user=request.user)
+            profile.subscription = True
+            profile.save()
+        else:
+            form_data = {
+                'full_name': request.POST['full_name'],
+                'email': request.POST['email'],
+                'user_trainer_code': request.POST['user_trainer_code'],
+            }
 
-            # Saves the user as subscribed if logged in
-            if request.user.is_authenticated:
-                profile = get_object_or_404(UserProfile, user=request.user)
-                profile.subscription = True
-                profile.save()
-
-    if subscription_status or request.method == 'POST':
-        # If the form is valid, creates an order
         order_form = OrderForm(form_data)
 
         if order_form.is_valid():
@@ -88,8 +84,6 @@ def checkout(request):
             bag = request.session.get('bag', {})
             if not bag:
                 return redirect(reverse('products'))
-            return redirect(reverse('checkout_success',
-                            args=[order.order_number]))
 
         order_form = OrderForm()
 
