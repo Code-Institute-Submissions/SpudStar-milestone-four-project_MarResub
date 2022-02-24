@@ -25,13 +25,13 @@
                                             <ul class="list-inline list-unstyled text-center m-auto">
                                                 {% ifnotequal 19 product.type1.pk %}
                                                     <li class="list-inline-item p-0 m-0">
-                                                        <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}" width="100%" height="auto">
+                                                        <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
                                                     </li>
                                                 {% endifnotequal %}
                                                 <!-- Checks to see if the pokemon has a second type and only creates a link if so -->
                                                 {% ifnotequal 19 product.type2.pk %}
                                                     <li class="list-inline-item p-0 m-0">
-                                                            <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}" width="100%" height="auto">
+                                                            <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}">
                                                     </li>
                                                 {% endifnotequal %}
                                             </ul>
