@@ -23,6 +23,7 @@ def checkout(request):
     template = 'checkout/checkout.html'
     bag = request.session.get('bag', {})
     order_form = OrderForm()
+    form_data = None
 
     # Checks if there is a current user
     if request.user.is_authenticated:
@@ -36,9 +37,6 @@ def checkout(request):
             }
             # Checks if the user is subscribed
             subscription_status = profile.subscription
-
-    if subscription_status:
-        return redirect(reverse('products'))
 
     # Checks if the person needs to pay anything
     if not subscription_status:
@@ -72,6 +70,7 @@ def checkout(request):
 
     if subscription_status or request.method == 'POST':
         # If the form is valid, creates an order
+        order_form = OrderForm(form_data)
 
         if order_form.is_valid():
             order = order_form.save()
