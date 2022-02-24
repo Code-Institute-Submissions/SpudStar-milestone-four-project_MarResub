@@ -22,6 +22,7 @@ def checkout(request):
     client_secret_value = None
     template = 'checkout/checkout.html'
     bag = request.session.get('bag', {})
+    order_form = OrderForm()
 
     # Checks if there is a current user
     if request.user.is_authenticated:
@@ -66,11 +67,9 @@ def checkout(request):
                 profile.subscription = True
                 profile.save()
 
-    order_form = OrderForm(form_data)
-    
     if subscription_status or request.method == 'POST':
         # If the form is valid, creates an order
-        
+
         if order_form.is_valid():
             order = order_form.save()
             for item_id, item_data in bag.items():
