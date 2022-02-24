@@ -46,7 +46,8 @@ def checkout(request):
             # Checks if the user is subscribed
             subscription_status = profile.subscription
 
-    # Checks if the person needs to pay anything
+    # Runs the complete order code if a form has been submitted, or if 
+    # the user is already subscribed
     if request.method == 'POST' or subscription_status:
 
         if request.user.is_authenticated and not subscription_status:
