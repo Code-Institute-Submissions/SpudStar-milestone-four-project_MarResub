@@ -80,8 +80,6 @@ def checkout(request):
         order_form = OrderForm()
 
     template = 'checkout/checkout.html'
-    if subscription_status:
-        template = 'checkout/checkout_success.html'
 
     context = {
         'order_form': order_form,

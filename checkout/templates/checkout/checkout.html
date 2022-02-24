@@ -16,7 +16,7 @@
                     {{ order_form.user_trainer_code | as_crispy_field }}
                 </fieldset>
             {% endif %}
-            {% if not user_subscribed %}
+            {% if user_subscribed %}
                 <fieldset>
                         <legend>Payment Information</legend>
                         <div id="card-element"></div>
