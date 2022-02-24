@@ -31,6 +31,8 @@ def checkout(request):
                     currency=settings.STRIPE_CURRENCY,
                 )
 
+    console.log(intent.client_secret)
+    console.log(stripe_public_key)
     # Code to check if user is subscribed already
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
@@ -82,13 +84,14 @@ def checkout(request):
                     return redirect(reverse('products'))
 
             order_form = OrderForm()
+            return redirect(reverse('products'))
     else:
         return redirect(reverse('home'))
 
     context = {
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-        'user_details': user_profile,
+        'user_details': user_profile.default_email,
     }
 
     return render(request, template, context)
