@@ -39,6 +39,17 @@ def checkout(request):
                     'user_trainer_code': request.POST['user_trainer_code'],
                 }
 
+            if not subscription_status:
+                stripe_total = round(SUBSCRIPTION_COST*100)
+                stripe.api_key = stripe_secret_key
+
+                intent = stripe.PaymentIntent.create(
+                        amount=stripe_total,
+                        currency=settings.STRIPE_CURRENCY,
+                    )
+                profile.subscription = True
+                profile.save()
+
         order_form = OrderForm(form_data)
 
         # If the form is valid, creates an order
@@ -66,15 +77,6 @@ def checkout(request):
 
         order_form = OrderForm()
 
-    if not subscription_status:
-        stripe_total = round(SUBSCRIPTION_COST*100)
-        stripe.api_key = stripe_secret_key
-
-        intent = stripe.PaymentIntent.create(
-                amount=stripe_total,
-                currency=settings.STRIPE_CURRENCY,
-            )
-
     template = 'checkout/checkout.html'
 
     context = {
@@ -84,6 +86,7 @@ def checkout(request):
     }
 
     return render(request, template, context)
+
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
