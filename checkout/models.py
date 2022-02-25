@@ -10,12 +10,18 @@ from profiles.models import UserProfile
 
 class Order(models.Model):
 
+    # The Order Number to Identify it
     order_number = models.CharField(max_length=100, null=False, editable=False)
+    # The name/username associated with the order
     full_name = models.CharField(max_length=64, null=False, blank=False)
+    # The email associated with the order
     email = models.EmailField(max_length=50, null=False, blank=False)
+    # The trainer code associated with the order
     user_trainer_code = models.CharField(max_length=20,
                                          null=False, blank=False,)
+    # The date the order was made
     date = models.DateTimeField(auto_now_add=True)
+    # The logged in User associated with the order
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
                                      null=True, blank=True,
                                      related_name='orders')

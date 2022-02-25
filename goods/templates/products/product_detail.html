@@ -7,6 +7,7 @@
     <div class="row mt-4">
         <div class="col-lg-6 text-center">
             <div class = "card-container text-center">
+                <!-- Sets the image of the pokemon -->
                 <div class="card-image-container text-center">
                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ product.pdex_no }}.png" onerror="this.src='{{ MEDIA_URL }}no_image.png';" alt="{{ product.name }}"> <!-- Displays the cards image using a url-->
                 </div> 
@@ -14,14 +15,19 @@
         </div>
         <div class="col-12 col-md-6 col-lg-4 text-center m-auto">
             <div class="mb-5 mt-md-5 text-center">
+                <!-- Displays the name and level of the pokemon -->
                 <h4 class="mb-0">{{ product.name }} Lvl: {{ product.level }}</h4>
                 <div class = "row text-center py-3">
                     <ul class="list-inline list-unstyled text-center m-auto">
-                        <li class="list-inline-item p-0 m-0">
-                          <a href="{% url 'products' %}?category={{ product.type1.pk }}">
-                            <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
-                          </a>
-                        </li>
+                        <!-- Displays the first type of the pokemon -->
+                        {% ifnotequal 19 product.type1.pk %}
+                            <li class="list-inline-item p-0 m-0">
+                                <a href="{% url 'products' %}?category={{ product.type1.pk }}">
+                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
+                                </a>
+                            </li>
+                        {% endifnotequal %}
+                        <!-- Displays the second type of the pokemon -->
                         {% ifnotequal 19 product.type2.pk %}
                             <li class="list-inline-item p-0 m-0">
                                 <a href="{% url 'products' %}?category={{ product.type2.pk }}">
@@ -79,16 +85,19 @@
                             </div>
                         </div>
                     </form>
+                <!-- If the pokemon is added to the bag, gives the users the ability to navigate elsewhere for convienience -->
                 {% else %}
                     <div class="row text-center mb-2"><p class="lead m-auto">Product is added to your bag.</p></div>
                     <div class="row my-3">
                         <div class="col">
+                            <!-- Takes the user back to the pokemon -->
                             <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg btn-light">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="text-uppercase">Keep Shopping</span>
                             </a>
+                            <!-- Takes the user to the bag -->
                             <a href="{% url 'bag' %}" class="btn btn-outline-light rounded-0 btn-lg">
                                 <span class="icon">
                                     <i class="fas fa-shopping-bag"></i>

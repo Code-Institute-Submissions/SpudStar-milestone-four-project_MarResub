@@ -7,6 +7,7 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
+        # Sets the fields of the Order model to use
         fields = ('full_name', 'email', 'user_trainer_code')
 
     def __init__(self, *args, **kwargs):

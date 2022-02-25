@@ -8,10 +8,12 @@
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
+            <!-- Displays the user's current values for requests -->
             <div class="mt-4">
                 <legend>Your Details</legend>
                 <p>{{ user_details }}</p>
             </div>
+            <!-- Fieldset holding the stripe card inputs -->
             <fieldset>
                 <legend>Payment Information</legend>
                 <div id="card-element"></div>

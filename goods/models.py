@@ -24,20 +24,26 @@ class Category(models.Model):
 
 
 class Info(models.Model):
+    # Name of the pokemon
     name = models.CharField(max_length=20)
+    # Level of the pokemon
     level = models.IntegerField(null=True, blank=True)
+    # Pokedex number of the pokemon
     pdex_no = models.IntegerField()
+    # Generation the pokemon is from
     generation = models.IntegerField(null=True, blank=True)
     # Abilities not displayed anywhere due to the odd formatting it in the
     # database I used, kept in as it is still a useful feature that could
     # be implemented in the future
     abilities = models.CharField(max_length=100)
 
+    # The two types the pokemon can be, used to filter
     type1 = models.ForeignKey('Category', null=True, blank=True,
                               on_delete=models.SET_NULL)
     type2 = models.ForeignKey('Category', null=True, blank=True,
                               on_delete=models.SET_NULL, related_name='typ2')
 
+    # The pokemons stats
     hp = models.IntegerField(null=True, blank=True)
     attack = models.IntegerField(null=True, blank=True)
     defense = models.IntegerField(null=True, blank=True)

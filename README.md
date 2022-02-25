@@ -148,6 +148,9 @@ A huge frustration through this was when a migration and data was already loaded
 ### Images not showing on mobile IOS
 After finally getting the Google Cloud working, the hosting service I intially used for my static files, the images for all the links were no more. It turns out Google Cloud cannot display images on IOS devices without major changes to code. In the end I opted to use AWS which fixed the issue.
 
+### Breakdown of Tests
+Additional testing information can be found in testing.md, an additional file in read me resources.
+
 ## Testing User Stories
 
 ### The Owner -
@@ -278,6 +281,8 @@ I should mention however that despite the source links all of the images are usi
 ## Acknowledgement
 
 A huge thank you to the Student Care team, especially Kieron, whom without which this definitely wouldn't have been possible. It has been a nightmare of a month with illness and bereavement, and thankfully now I have a valid project to submit.
+
+Thank you to my mentor for going through my code ensuring it should pass the criteria, and going over the changes needed for the project with me.
 
 Also a thank you to the Tutors, who helped me figure out why the ListItemInline wasnt inline in the admin, and sort out the stripe errors coming from my subscription system due to lapses in logic.
 
