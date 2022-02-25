@@ -28,14 +28,20 @@ def checkout(request):
     stripe.api_key = stripe_secret_key
 
     intent = stripe.PaymentIntent.create(
-                    amount=stripe_total,
-                    currency=settings.STRIPE_CURRENCY,
-                )
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+    
+    print (intent)
+    sys.stdout.flush()
+
 
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user=request.user)
         user_profile = profile
+        print ("Check 1")
+        sys.stdout.flush()
         # Test to avoid crashing
         if profile:
             # Populates the form data with the user's
@@ -44,14 +50,21 @@ def checkout(request):
                 'email': profile.default_email,
                 'user_trainer_code': profile.default_trainer_code,
             }
+            
             # Checks if the user is subscribed
             subscription_status = profile.subscription
+            print ("Check 2")
+            print (subscription_status)
+            sys.stdout.flush()
         else:
             messages.error(request,'Cant find your profile, please relog.')
             return redirect(reverse('bag'))
         # Runs the complete order code if a form has been submitted, or if
         # the user is already subscribed
         if request.method == 'POST' or subscription_status:
+
+            print ("Check 3")
+            sys.stdout.flush()
 
             if not subscription_status:
                 # Saves the user as subscribed if logged in and not subscribed
@@ -61,10 +74,15 @@ def checkout(request):
                 profile.subscription = True
                 profile.save()
 
+                print ("Check 4")
+                sys.stdout.flush()
+
             order_form = OrderForm(form_data)
 
             # Checks the values in the user profile are valid
             if order_form.is_valid():
+                print ("Check 5")
+                sys.stdout.flush()
                 bag = request.session.get('bag', {})
                 order = order_form.save()
                 # Adds each item to the order
@@ -84,6 +102,8 @@ def checkout(request):
                         return redirect(reverse('bag'))
 
                 # Checkout is successful
+                print ("Check 6")
+                sys.stdout.flush()
                 return redirect(reverse('checkout_success',
                                 args=[order.order_number]))
             else:
@@ -92,6 +112,8 @@ def checkout(request):
                 messages.error(request, 'There is an error with your details.')
                 if not bag:
                     return redirect(reverse('products'))
+                print ("Check 7")
+                sys.stdout.flush()
 
             order_form = OrderForm()
             
@@ -99,6 +121,8 @@ def checkout(request):
         # Asks the user to log in before submitting
         messages.error(request, 'You must be logged in to submit requests.')
         return redirect(reverse('bag'))
+        print ("Check 8")
+                sys.stdout.flush()
 
     # Sends context to checkout view for the script
     context = {
@@ -106,6 +130,10 @@ def checkout(request):
         'client_secret': intent.client_secret,
         'user_details': user_profile,
     }
+
+    print ("Check 9")
+    print (context)
+    sys.stdout.flush()
 
     return render(request, template, context)
 
