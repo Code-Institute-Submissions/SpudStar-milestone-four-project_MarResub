@@ -1,29 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
-{% endblock %}
-
+<!-- Initially used Boutique Ado's HTML to allow me to test it worked, have since adapted it for my own project -->
 {% block content %}
     <div class="overlay"></div>
     <div class="col-6 mt-3 mx-auto text-center">
+        <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
-            <fieldset>
+            <!-- Displays the user's current values for requests -->
+            <div class="mt-4">
                 <legend>Your Details</legend>
-                {{ order_form.full_name | as_crispy_field }}
-                {{ order_form.email | as_crispy_field }}
-                {{ order_form.user_trainer_code | as_crispy_field }}
-            </fieldset>
+                <p class="display-8">Name: {{ user_details }}</p>
+                <p class="display-8">Email: {{ user_details.default_email }}</p>
+                <p class="display-8">Trainer Code: {{ user_details.default_trainer_code }}</p>
+            </div>
+            <!-- Fieldset holding the stripe card inputs -->
             <fieldset>
-                    <legend>Payment Information</legend>
-                    <div id="card-element"></div>
-                    <div id="card-error-message"></div>
-                    <h6>Note: requests cost £4.99 per checkout so please add all your pokemon first!</h6>
+                <legend>Payment Information</legend>
+                <div id="card-element"></div>
+                <div id="card-error-message"></div>
             </fieldset>
             <div class="mt-4">
-                <!-- Buttons -->
+                <!-- Button to finish the order -->
                 <button id='submit-button' class='btn btn-outline-light'>
                     <span>Finish</span>
                 </button>
@@ -32,8 +31,10 @@
     </div>
 {% endblock %}
 
+<!-- Link to script for checkout -->
 {% block postloadjs %}
-    {{ stripe_public_key | json_script:"id_stripe_public_key"}}
-    {{ client_secret | json_script:"id_client_secret"}}
-    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+        {{ stripe_public_key | json_script:"id_stripe_public_key"}}
+        {{ client_secret | json_script:"id_client_secret"}}
+        <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
+
