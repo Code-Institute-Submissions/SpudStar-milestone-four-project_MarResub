@@ -1,93 +1,141 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.conf import settings
+from django.contrib import messages
 
 from goods.models import Info
 from profiles.models import UserProfile
 from .models import Order, OrderLineItem
 
+# Gets the cost of a request
 from bag.contexts import SUBSCRIPTION_COST
 from .forms import OrderForm
 from profiles.forms import UserProfileForm
 
 import stripe
-# Create your views here.
 
 
+# Uses the stripe keys and the form data to make a purchase
 def checkout(request):
+    
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-
-    if request.method == 'POST':
-        bag = request.session.get('bag', {})
-
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'user_trainer_code': request.POST['user_trainer_code'],
-        }
-
-        order_form = OrderForm(form_data)
-        
-        if order_form.is_valid():
-            order = order_form.save()
-            for item_id, item_data in bag.items():
-                try:
-                    product = Info.objects.get(id=item_id)
-                    order_line_item = OrderLineItem(
-                            order=order,
-                            product=product,
-                        )
-                    order_line_item.save()
-                except Info.DoesNotExist:
-                    order.delete()
-                    return redirect(reverse('view_bag'))
-
-            return redirect(reverse('checkout_success',
-                            args=[order.order_number]))
-    else:
-        bag = request.session.get('bag', {})
-        if not bag:
-            return redirect(reverse('products'))
-
-        order_form = OrderForm()
+    subscription_status = False
+    template = 'checkout/checkout.html'
+    form_data = None
+    user_profile = None
 
     stripe_total = round(SUBSCRIPTION_COST*100)
     stripe.api_key = stripe_secret_key
+
+    messages.error(request, 'Check 20')
 
     intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
+    
+    messages.error(request, 'Check 0')
 
-    template = 'checkout/checkout.html'
 
+    # Checks if there is a current user to avoid errors
+    if request.user.is_authenticated:
+        profile = get_object_or_404(UserProfile, user=request.user)
+        user_profile = profile
+        messages.error(request, 'Check 1')
+        # Test to avoid crashing
+        if profile:
+            # Populates the form data with the user's
+            form_data = {
+                'full_name': profile.user,
+                'email': profile.default_email,
+                'user_trainer_code': profile.default_trainer_code,
+            }
+            
+            # Checks if the user is subscribed
+            subscription_status = profile.subscription
+            messages.error(request, 'Check 2')
+        else:
+            messages.error(request,'Cant find your profile, please relog.')
+            return redirect(reverse('bag'))
+        # Runs the complete order code if a form has been submitted, or if
+        # the user is already subscribed
+        if request.method == 'POST' or subscription_status:
+
+            messages.error(request, 'Check 3')
+
+            if not subscription_status:
+                # Saves the user as subscribed if logged in and not subscribed
+                messages.success(request,
+                                 'You have now subscribed to our service.')
+                profile = get_object_or_404(UserProfile, user=request.user)
+                profile.subscription = True
+                profile.save()
+
+                messages.error(request, 'Check 4')
+
+            order_form = OrderForm(form_data)
+
+            # Checks the values in the user profile are valid
+            if order_form.is_valid():
+                messages.error(request, 'Check 5')
+                bag = request.session.get('bag', {})
+                order = order_form.save()
+                # Adds each item to the order
+                for item_id, item_data in bag.items():
+                    try:
+                        product = Info.objects.get(id=item_id)
+                        order_line_item = OrderLineItem(
+                                order=order,
+                                product=product,
+                            )
+                        order_line_item.save()
+                    # If a pokemon somehow doesn't exist, returns to bag
+                    except Info.DoesNotExist:
+                        order.delete()
+                        messages.error(request, 
+                                       'There was an error with a pokemon')
+                        return redirect(reverse('bag'))
+
+                # Checkout is successful
+                messages.error(request, 'Check 8')
+                return redirect(reverse('checkout_success',
+                                args=[order.order_number]))
+            else:
+                # One or more user detail is incorrect
+                bag = request.session.get('bag', {})
+                messages.error(request, 'There is an error with your details.')
+                if not bag:
+                    return redirect(reverse('products'))
+
+            order_form = OrderForm()
+            
+    else:
+        # Asks the user to log in before submitting
+        messages.error(request, 'You must be logged in to submit requests.')
+        return redirect(reverse('bag'))
+
+    # Sends context to checkout view for the script
     context = {
-        'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'user_details': user_profile,
     }
 
+    messages.error(request, 'Check 9')
     return render(request, template, context)
+
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
+    # Checks user is logged in
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
 
-        # Saves the users info
-        profile_data = {
-            'default_trainer_number': order.user_trainer_code,
-            'default_email': order.email,
-            'subscribed': True,
-        }
-        user_profile_form = UserProfileForm(profile_data, instance=profile)
-        if user_profile_form.is_valid():
-            user_profile_form.save()
-
+    # Deletes the current bag session
     if 'bag' in request.session:
         del request.session['bag']
 
