@@ -24,6 +24,14 @@ def checkout(request):
     form_data = None
     user_profile = None
 
+    stripe_total = round(SUBSCRIPTION_COST*100)
+    stripe.api_key = stripe_secret_key
+
+    intent = stripe.PaymentIntent.create(
+                    amount=stripe_total,
+                    currency=settings.STRIPE_CURRENCY,
+                )
+
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user=request.user)
@@ -86,15 +94,6 @@ def checkout(request):
                     return redirect(reverse('products'))
 
             order_form = OrderForm()
-        else:
-            # Sets up the stripe intent for subscription
-            stripe_total = round(SUBSCRIPTION_COST*100)
-            stripe.api_key = stripe_secret_key
-
-            intent = stripe.PaymentIntent.create(
-                            amount=stripe_total,
-                            currency=settings.STRIPE_CURRENCY,
-                        )
             
     else:
         # Asks the user to log in before submitting
