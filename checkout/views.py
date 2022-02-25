@@ -27,6 +27,8 @@ def checkout(request):
     stripe_total = round(SUBSCRIPTION_COST*100)
     stripe.api_key = stripe_secret_key
 
+    messages.error(request, 'Check 20')
+
     intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
