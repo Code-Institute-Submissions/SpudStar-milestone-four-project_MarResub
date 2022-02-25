@@ -122,7 +122,7 @@ def checkout(request):
         messages.error(request, 'You must be logged in to submit requests.')
         return redirect(reverse('bag'))
         print ("Check 8")
-                sys.stdout.flush()
+        sys.stdout.flush()
 
     # Sends context to checkout view for the script
     context = {
