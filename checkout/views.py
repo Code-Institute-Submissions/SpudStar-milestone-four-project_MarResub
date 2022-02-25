@@ -104,7 +104,7 @@ def checkout(request):
     context = {
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-        'user_details': user_profile.default_email,
+        'user_details': user_profile,
     }
 
     return render(request, template, context)

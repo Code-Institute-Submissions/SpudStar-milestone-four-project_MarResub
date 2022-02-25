@@ -4,7 +4,7 @@
 {% block content %}
     <!-- Temporarily used my milestone 3 card creation project as a layout due to similar stat system -->
     <!-- Have since edited it heavily to better suit my project, uses some of the same css class names but with the css for it changed -->
-    <div class="row mt-4">
+    <div class="row m-0">
         <div class="col-lg-6 text-center">
             <div class = "card-container text-center">
                 <!-- Sets the image of the pokemon -->
@@ -22,17 +22,13 @@
                         <!-- Displays the first type of the pokemon -->
                         {% ifnotequal 19 product.type1.pk %}
                             <li class="list-inline-item p-0 m-0">
-                                <a href="{% url 'products' %}?category={{ product.type1.pk }}">
-                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
-                                </a>
+                                <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type1 }}button.png" alt="The pokemons first type: {{ product.type1 }}">
                             </li>
                         {% endifnotequal %}
                         <!-- Displays the second type of the pokemon -->
                         {% ifnotequal 19 product.type2.pk %}
                             <li class="list-inline-item p-0 m-0">
-                                <a href="{% url 'products' %}?category={{ product.type2.pk }}">
-                                    <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}">
-                                </a>
+                                <img class="img-fluid" src="{{ MEDIA_URL }}type{{ product.type2 }}button.png" alt="The pokemons second type: {{ product.type2 }}">
                             </li>
                         {% endifnotequal %}
                     </ul>

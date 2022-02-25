@@ -58,13 +58,13 @@
                                 {% for _ in range %}
                                     <!-- Changes style slightly based on Odd or Even page number to break monotony and make it easier to see -->
                                     {% if forloop.counter|divisibleby:2 %}
-                                        <li class="list-inline-item">
+                                        <li class="list-inline-item m-0">
                                             <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}">
                                                 <span class="page-style-even clickable">{{ forloop.counter }}</span>
                                             </a>
                                         </li>
                                     {% else %}
-                                        <li class="list-inline-item">
+                                        <li class="list-inline-item m-0">
                                             <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}">
                                                 <span class="page-style-even clickable">{{ forloop.counter }}</span>
                                             </a>
