@@ -65,7 +65,7 @@ input.searchbar{
 }
 
 /* CSS for product display */
-tr, .order-holder{
+tr{
     background-color: #2d3035;
     width:100%;
     height:100%;

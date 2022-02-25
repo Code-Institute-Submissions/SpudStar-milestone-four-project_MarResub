@@ -31,7 +31,7 @@
                 <p class="text-muted">Order History</p>
                 <!-- Using Boutique Ado code to test functionality-->
                 <div class="table-responsive">
-                    <table class="table table-sm table-borderless">
+                    <table class="table table-sm table-striped">
                         <thead>
                             <tr>
                                 <th>Order Number</th>
@@ -41,7 +41,6 @@
                         </thead>
                         <tbody>
                             {% for order in orders %}
-                                <br>
                                 <tr>
                                     <td>
                                             {{ order.order_number|truncatechars:6 }}
