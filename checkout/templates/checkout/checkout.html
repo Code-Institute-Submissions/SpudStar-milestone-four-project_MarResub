@@ -11,7 +11,9 @@
             <!-- Displays the user's current values for requests -->
             <div class="mt-4">
                 <legend>Your Details</legend>
-                <p>{{ user_details }}</p>
+                <p class="display-8">Name: {{ user_details }}</p>
+                <p class="display-8">Email: {{ user_details.default_email }}</p>
+                <p class="display-8">Trainer Code: {{ user_details.default_trainer_code }}</p>
             </div>
             <!-- Fieldset holding the stripe card inputs -->
             <fieldset>
