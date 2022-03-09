@@ -29,13 +29,16 @@ def checkout(request):
 
     messages.error(request, 'Check 20')
 
-    intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
-    
-    messages.error(request, 'Check 0')
+    if not request.method == 'POST':
+        intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+            )
+    else:
+        if 'intent_made' in request.GET:
+            intent = request.GET['intent_made']
 
+    messages.error(request, 'Check 0')
 
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
@@ -55,7 +58,7 @@ def checkout(request):
             subscription_status = profile.subscription
             messages.error(request, 'Check 2')
         else:
-            messages.error(request,'Cant find your profile, please relog.')
+            messages.error(request, 'Cant find your profile, please relog.')
             return redirect(reverse('bag'))
         # Runs the complete order code if a form has been submitted, or if
         # the user is already subscribed
@@ -119,6 +122,7 @@ def checkout(request):
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
         'user_details': user_profile,
+        'intent_made': intent,
     }
 
     messages.error(request, 'Check 9')
