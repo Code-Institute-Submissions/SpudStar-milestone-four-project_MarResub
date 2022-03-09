@@ -50,6 +50,7 @@ form.addEventListener('submit', function(ev) {
             card: card,
         }
     }).then(function(result) {
+        
         if (result.error) {
             var errorDiv = document.getElementById('card-errors');
             var html = `
