@@ -6,7 +6,7 @@
     <div class="overlay"></div>
     <div class="col-6 mt-3 mx-auto text-center">
         <!-- The order form required for checkout, holds card details in different field set -->
-        <form action="{% url 'home' %}" method="POST" id="payment-form">
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}
             <!-- Displays the user's current values for requests -->
             <div class="mt-4">

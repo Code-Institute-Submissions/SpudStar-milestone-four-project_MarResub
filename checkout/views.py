@@ -37,7 +37,6 @@ def checkout(request):
     else:
         if 'intent_made' in request.GET:
             intent = request.GET['intent_made']
-        return redirect(reverse('products'))
 
     messages.error(request, 'Check 0')
 
