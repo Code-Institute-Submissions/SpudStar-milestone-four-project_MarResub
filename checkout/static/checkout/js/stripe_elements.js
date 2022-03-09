@@ -1,37 +1,30 @@
 /* Please note that the following code is from Stripes library,
 This allows for the customer to checkout*/
-var stripePublicKey = $('#id_stripe_public_key').text().slice(1,-1);
-var clientSecret = $('#id_client_secret').text().slice(1,-1);
+var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
-
-var card = elements.create('card', {
-    style: {
-      base: {
-        iconColor: '#c4f0ff',
-        color: '#fff',
-        fontWeight: '500',
-        fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-        fontSize: '16px',
+var style = {
+    base: {
+        color: '#000',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
-        ':-webkit-autofill': {
-          color: '#fce883',
-        },
+        fontSize: '16px',
         '::placeholder': {
-          color: '#87BBFD',
-        },
-      },
-      invalid: {
-        iconColor: '#FFC7EE',
-        color: '#FFC7EE',
-      },
+            color: '#aab7c4'
+        }
     },
-  });
-
+    invalid: {
+        color: '#dc3545',
+        iconColor: '#dc3545'
+    }
+};
+var card = elements.create('card', {style: style});
 card.mount('#card-element');
 
+// Handle realtime validation errors on the card element
 card.addEventListener('change', function (event) {
-    var errorDiv = document.getElementById('card-error-message');
+    var errorDiv = document.getElementById('card-errors');
     if (event.error) {
         var html = `
             <span class="icon" role="alert">
@@ -45,20 +38,18 @@ card.addEventListener('change', function (event) {
     }
 });
 
-// Checks if the form can be submitted
+// Handle form submit
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-    form.submit();
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
         }
     }).then(function(result) {
-        
         if (result.error) {
             var errorDiv = document.getElementById('card-errors');
             var html = `
@@ -70,10 +61,9 @@ form.addEventListener('submit', function(ev) {
             card.update({ 'disabled': false});
             $('#submit-button').attr('disabled', false);
         } else {
-            /*if (result.paymentIntent.status === 'succeeded') {
+            if (result.paymentIntent.status === 'succeeded') {
                 form.submit();
-            }*/
-            
+            }
         }
     });
 });
