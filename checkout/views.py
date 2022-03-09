@@ -16,7 +16,7 @@ import stripe
 
 # Uses the stripe keys and the form data to make a purchase
 def checkout(request):
-    
+
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     subscription_status = False
@@ -27,24 +27,11 @@ def checkout(request):
     stripe_total = round(SUBSCRIPTION_COST*100)
     stripe.api_key = stripe_secret_key
 
-    messages.error(request, 'Check 20')
-
-    if not request.method == 'POST':
-        intent = stripe.PaymentIntent.create(
-                amount=stripe_total,
-                currency=settings.STRIPE_CURRENCY,
-            )
-    else:
-        if 'intent_made' in request.GET:
-            intent = request.GET['intent_made']
-
-    messages.error(request, 'Check 0')
-
     # Checks if there is a current user to avoid errors
     if request.user.is_authenticated:
         profile = get_object_or_404(UserProfile, user=request.user)
         user_profile = profile
-        messages.error(request, 'Check 1')
+
         # Test to avoid crashing
         if profile:
             # Populates the form data with the user's
@@ -53,19 +40,15 @@ def checkout(request):
                 'email': profile.default_email,
                 'user_trainer_code': profile.default_trainer_code,
             }
-            
+
             # Checks if the user is subscribed
             subscription_status = profile.subscription
-            messages.error(request, 'Check 2')
         else:
             messages.error(request, 'Cant find your profile, please relog.')
             return redirect(reverse('bag'))
         # Runs the complete order code if a form has been submitted, or if
         # the user is already subscribed
         if request.method == 'POST' or subscription_status:
-
-            messages.error(request, 'Check 3')
-
             if not subscription_status:
                 # Saves the user as subscribed if logged in and not subscribed
                 messages.success(request,
@@ -80,7 +63,6 @@ def checkout(request):
 
             # Checks the values in the user profile are valid
             if order_form.is_valid():
-                messages.error(request, 'Check 5')
                 bag = request.session.get('bag', {})
                 order = order_form.save()
                 # Adds each item to the order
@@ -95,12 +77,11 @@ def checkout(request):
                     # If a pokemon somehow doesn't exist, returns to bag
                     except Info.DoesNotExist:
                         order.delete()
-                        messages.error(request, 
+                        messages.error(request,
                                        'There was an error with a pokemon')
                         return redirect(reverse('bag'))
 
                 # Checkout is successful
-                messages.error(request, 'Check 8')
                 return redirect(reverse('checkout_success',
                                 args=[order.order_number]))
             else:
@@ -109,23 +90,24 @@ def checkout(request):
                 messages.error(request, 'There is an error with your details.')
                 if not bag:
                     return redirect(reverse('products'))
-
             order_form = OrderForm()
-            
     else:
         # Asks the user to log in before submitting
         messages.error(request, 'You must be logged in to submit requests.')
         return redirect(reverse('bag'))
+
+    intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
 
     # Sends context to checkout view for the script
     context = {
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
         'user_details': user_profile,
-        'intent_made': intent,
     }
 
-    messages.error(request, 'Check 9')
     return render(request, template, context)
 
 
