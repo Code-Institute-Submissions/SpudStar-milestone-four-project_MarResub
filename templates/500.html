@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col my-4 text-center">
+        <div class="col my-4 text-center p-0">
             <hr>
             <h2>Error 500</h2>
             <hr>
@@ -14,14 +14,14 @@
             <p class="text-white my-4">Sorry, there was an unexpected server error.</p>
             <p class="text-white my-4">Please use these buttons to get back on track:</p>
             <div class="row">
-                <div class="col-5 offset-md-1">
-                    <a href="/" class="btn btn-outline-black rounded-0 btn-lg btn-light">
+                <div class="col">
+                    <!-- Takes the user back to the home -->
+                    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg btn-light">
                         <span class="text-uppercase">Go to Homepage</span>
                     </a>
-                </div>
-                <div class="col-5">
+                    <!-- Takes the user to the pokemon -->
                     <a href="{% url 'bag' %}" class="btn btn-outline-light rounded-0 btn-lg">
-                        <span class="text-uppercase">Go to Products</span>
+                        <span class="text-uppercase">Browse Pokemon</span>
                     </a>
                 </div>
             </div>
