@@ -57,8 +57,6 @@ def checkout(request):
                 profile.subscription = True
                 profile.save()
 
-                messages.error(request, 'Check 4')
-
             order_form = OrderForm(form_data)
 
             # Checks the values in the user profile are valid

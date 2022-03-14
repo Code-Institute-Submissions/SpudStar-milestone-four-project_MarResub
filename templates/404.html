@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col my-4 text-center">
+            <hr>
+            <h2>Error 404</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row pb-3">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <p class="text-white my-4">Sorry, this page doesn't exist.</p>
+            <p class="text-white my-4">Please use these buttons to get back on track:</p>
+            <div class="row">
+                <div class="col-5 offset-md-1">
+                    <a href="/" class="btn btn-outline-black rounded-0 btn-lg btn-light">
+                        <span class="text-uppercase">Go to Homepage</span>
+                    </a>
+                </div>
+                <div class="col-5">
+                    <a href="{% url 'bag' %}" class="btn btn-outline-light rounded-0 btn-lg">
+                        <span class="text-uppercase">Go to Products</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
