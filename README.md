@@ -129,6 +129,8 @@ After implementing the page system the website gave an improvement to performanc
 
 The images specifically shown were when testing responsitivity on filtering the products by electric typage.
 
+While this has improved the UX of the site massively reducing the load times for a better user experience, I was unable to style the page buttons to the size I wanted due to the li element's list-inline-block class overwriting the size change CSS. I tried methods higher in the hierarchy to overwrite it but to no avail. Thankfully after testing on a mobile myself i could still easily click the page I wanted, but I would call it the one letdown in the UX for the website as a whole.
+
 ### Other Validation
 A lot of manual testing went on during the making of this project. I would often use print(x) to check the status of models or just display something if a particular section of code is working. My problem solving through this method and the debug combined proved instrumental in completing the project.
 #
