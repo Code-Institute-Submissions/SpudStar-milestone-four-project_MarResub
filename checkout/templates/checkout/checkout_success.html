@@ -20,20 +20,20 @@
                 <!-- Lets the User know what key details they submitted -->
                 <p class="text-black">Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
                 <p class="text-black">The owner of the pokemon will also be sent an email with your trainer ID: <strong>{{ order.user_trainer_code }}</strong>.</p>
-                <p class="text-black">*Please note that I ran out of time to add this functionality, however the website can send emails as shown by the allauth system*</p>
+                <p class="text-black">*Please note that this functionality is not yet implemented, however the website can send emails as shown by the allauth system*</p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-lg-7 m-auto">
-                <div class="p-2 border">
-                    <!-- Holds key values of the order -->
+                <!-- Holds key values of the order -->
+                <div class="p-2 border bg-dark">
                     <div class="row">
                         <div class="col">
                             <small class="text-muted">Total Requests:</small>
                         </div>
                     </div>
-
+                    <!-- Holds the Order ID of the order -->
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 text-black font-weight-bold">Request Id</p>
@@ -42,7 +42,7 @@
                             <p class="mb-0">{{ order.order_number }}</p>
                         </div>
                     </div>
-
+                    <!-- Holds the date the order was made -->
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 text-black font-weight-bold">Request Date</p>
@@ -51,7 +51,6 @@
                             <p class="mb-0">{{ order.date }}</p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col">
                             <small class="text-muted">Request Details:</small>

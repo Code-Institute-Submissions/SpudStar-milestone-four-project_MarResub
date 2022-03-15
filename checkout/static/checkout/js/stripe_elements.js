@@ -30,8 +30,9 @@ var card = elements.create('card', {
 
 card.mount('#card-element');
 
+// Handle realtime validation errors on the card element
 card.addEventListener('change', function (event) {
-    var errorDiv = document.getElementById('card-error-message');
+    var errorDiv = document.getElementById('card-errors');
     if (event.error) {
         var html = `
             <span class="icon" role="alert">
@@ -45,7 +46,7 @@ card.addEventListener('change', function (event) {
     }
 });
 
-// Checks if the form can be submitted
+// Handle form submit
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
@@ -57,19 +58,21 @@ form.addEventListener('submit', function(ev) {
             card: card,
         }
     }).then(function(result) {
-        if (result.error) {
-            var errorDiv = document.getElementById('card-errors');
-            var html = `
-                <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-                </span>
-                <span>${result.error.message}</span>`;
-            $(errorDiv).html(html);
-            card.update({ 'disabled': false});
-            $('#submit-button').attr('disabled', false);
+        
+        if (result.paymentIntent.status === 'succeeded') {
+            form.submit();
         } else {
-            if (result.paymentIntent.status === 'succeeded') {
-                form.requestSubmit();
+            if (result.error) {
+                var errorDiv = document.getElementById('card-errors');
+                var html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                $(errorDiv).html(html);
+                card.update({ 'disabled': false});
+                $('#submit-button').attr('disabled', false);
+                form.submit();
             }
         }
     });
