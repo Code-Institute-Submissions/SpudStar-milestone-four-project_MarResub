@@ -52,19 +52,21 @@
                 </div>
                 <div class="row">
                     <div class = "col-12">
+                        <!-- Code to generate page links -->
                         <ul class="list-inline">
                             {% with ''|center:max_pages as range %} <!-- Code to iterate numerical loops in DJango Templates from https://stackoverflow.com/questions/1107737/numeric-for-loop-in-django-templates -->
                                 {% for _ in range %}
+                                    <!-- Changes style slightly based on Odd or Even page number to break monotony and make it easier to see -->
                                     {% if forloop.counter|divisibleby:2 %}
-                                        <li class="list-inline-item">
-                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}">
-                                                <span class="page-style-even page-style clickable">{{ forloop.counter }}</span>
+                                        <li class="list-inline-item m-0">
+                                            <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}">
+                                                <span class="page-style-even clickable">{{ forloop.counter }}</span>
                                             </a>
                                         </li>
                                     {% else %}
-                                        <li class="list-inline-item">
-                                            <a class="link-remover" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}">
-                                                <span class="page-style-even page-style clickable">{{ forloop.counter }}</span>
+                                        <li class="list-inline-item m-0">
+                                            <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_no }}&page_no={{ forloop.counter }}">
+                                                <span class="page-style-even clickable">{{ forloop.counter }}</span>
                                             </a>
                                         </li>
                                     {% endif %}

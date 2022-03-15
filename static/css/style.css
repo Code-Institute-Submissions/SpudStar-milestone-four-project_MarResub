@@ -67,10 +67,13 @@ input.searchbar{
 /* CSS for product display */
 tr{
     background-color: #2d3035;
-    color:#000000;
     width:100%;
     height:100%;
+    color:white;
 }
+
+/* CSS for checkout display */
+
 
 /* Classes repurposed from milestone 3 to display pokemon stat values */
 .card-container{
@@ -104,7 +107,7 @@ tr{
 }
 
 /* Styling for page buttons */
-.page-style{
+a.page-style{
     height:35px;
     width:30px;
     margin:0;

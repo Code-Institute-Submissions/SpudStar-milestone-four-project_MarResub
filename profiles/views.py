@@ -6,6 +6,10 @@ from .forms import UserProfileForm
 
 # Tries to retrieve the user's profile, and orders
 def profile(request):
+    # Checks if soeone not logged in is trying to access the profile app
+    if not request.user.is_authenticated:
+        return redirect(reverse('home'))
+
     profiles = get_object_or_404(UserProfile, user=request.user)
 
     # If the user updates their information, save it

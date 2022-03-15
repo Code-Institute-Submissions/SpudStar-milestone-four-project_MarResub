@@ -17,15 +17,17 @@ def all_products(request):
     products_per_page = 20
 
     if request.GET:
+        # Gets the pokemon type requested
         if 'category' in request.GET:
             categories = request.GET['category']
             # Checks both types for the type requested
             queries = Q(type1=categories) | Q(type2=categories)
             try:
                 products = products.filter(queries)
-            except TypeError:
+            except ValueError:
                 products = Info.objects.all()
 
+        # Checks if the search is by name
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -34,9 +36,11 @@ def all_products(request):
             queries = Q(name__icontains=query)
             products = products.filter(queries)
 
+        # Gets the page number requested
         if 'page_no' in request.GET:
             page = int(request.GET['page_no'])
 
+    # Math to figure out how many pages are needed, and what entries are displayed
     min_entry = (page-1)*products_per_page
     max_entry = page*products_per_page
     max_pages = math.ceil(len(products)/products_per_page)
@@ -60,6 +64,7 @@ def product_detail(request, product_id):
 
     bag = request.session.get('bag', {})
 
+    # Checks if the pokemon is already in the bag
     if str(product.id) in bag.keys():
         not_in_bag_check = False
 
@@ -119,6 +124,7 @@ def edit_product(request, product_id):
         'form': form,
         'product': product,
     }
+
     return render(request, template, context)
 
 

@@ -6,11 +6,13 @@ from .models import UserProfile
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
+        # Excludes the fields the user shouldn't be able to change
         exclude = ('user', 'subscription',)
 
     def __init__(self, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
+        # Sets placeholder values
         placeholders = {
             'default_trainer_code': 'Trainer Code',
             'default_email': 'Email',
