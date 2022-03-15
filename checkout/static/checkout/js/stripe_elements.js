@@ -5,6 +5,7 @@ var clientSecret = $('#id_client_secret').text().slice(1,-1);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 
+// Creates the stripe card element and styles it
 var card = elements.create('card', {
     style: {
       base: {
@@ -50,6 +51,7 @@ card.addEventListener('change', function (event) {
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
+    // If form is submitted, disable the submit button
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
@@ -58,12 +60,15 @@ form.addEventListener('submit', function(ev) {
             card: card,
         }
     }).then(function(result) {
+        // Check if payment was successful on submission
         try {
             if (result.paymentIntent.status === 'succeeded') {
                 form.submit();
             }
         }
+        // If .status is undefined, run this code
         catch(err) {
+            // Check if there is an error message on submission
             if (result.error) {
                 var errorDiv = document.getElementById('card-errors');
                 var html = `

@@ -1,3 +1,4 @@
+/* -- Controlls padding between nav and content -- */
 div.nav-offset{
     padding-top:180px;
     background-color: hsla(218, 8%, 19%, 0.416);
@@ -11,6 +12,8 @@ div.nav-offset{
     }
 }
 
+/* -- General Stylings -- */
+/* Sets background colour for body if background image fails to load */
 body{
     background-color: #1d2128;
 }
@@ -32,23 +35,11 @@ footer {
     color:#ffffff !important;
 }
 
-a.link-remover{
-    color:#b3b3b3 !important;
-    text-decoration:none;
-}
-
-a.link-remover:hover {
-    color:#ffffff !important;
-}
-
-.clickable {
-    cursor:pointer; 
-}
-
 .topbuffer{
     padding-top:20px;
 }
 
+/* Helps size the searchbar on large screens */
 input.searchbar{
     max-width:200px;
     display:inline-block;
@@ -58,13 +49,31 @@ input.searchbar{
     width:100%;
 }
 
+/* Adds background image to website */
 .hero-container {
     background: url("/media/bytesizebackground.png");
     background-repeat: repeat;
     padding: 0;
 }
 
-/* CSS for product display */
+/* -- Link Decoration -- */
+/* Removes blue underline from links */
+a.link-remover{
+    color:#b3b3b3 !important;
+    text-decoration:none;
+}
+
+/* Removes underline when links are hovered over */
+a.link-remover:hover {
+    color:#ffffff !important;
+}
+
+/* Changes cursor to help point out something is clickable */
+.clickable {
+    cursor:pointer; 
+}
+
+/*-- CSS for product display in bag template --*/
 tr{
     background-color: #2d3035;
     width:100%;
@@ -72,7 +81,7 @@ tr{
     color:white;
 }
 
-/* Classes repurposed from milestone 3 to display pokemon stat values */
+/* -- Classes used to display pokemon data -- */
 .card-container{
     border-radius: 3px;
     border: solid rgb(0, 0, 0) 5px;
@@ -103,14 +112,13 @@ tr{
     margin-bottom:10px;
 }
 
-/* Styling for page buttons */
+/*-- Styling for page buttons --*/
 a.page-style{
-    height:35px;
-    width:30px;
     margin:0;
     margin-bottom: 10px;
 }
 
+/* Alternates colour between page buttons for better effect */
 .page-style-odd{
     border: solid rgb(252, 252, 252) 1px;
     background-color: #2b2b2b;
@@ -121,13 +129,15 @@ a.page-style{
     background-color: #303030;
 }
 
-/* CSS for message display */
+/*-- CSS for message display --*/
+/* Ensures messages don't have bullet points */
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
+/* Sets background colour for message depending on message type */
 .success-message{
     background-color: rgba(13, 83, 45, 0.486);
 }
@@ -139,4 +149,3 @@ ul {
 .default-message{
     background-color: rgba(78, 78, 78, 0.486);
 }
-

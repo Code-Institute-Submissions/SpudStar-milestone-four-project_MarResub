@@ -17,13 +17,16 @@ import stripe
 # Uses the stripe keys and the form data to make a purchase
 def checkout(request):
 
+    # Sets up values for stripe constants
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    # Sets default values for declared variables
     subscription_status = False
     template = 'checkout/checkout.html'
     form_data = None
     user_profile = None
 
+    # Converts subscription cost so stripe can handle it
     stripe_total = round(SUBSCRIPTION_COST*100)
     stripe.api_key = stripe_secret_key
 
@@ -32,7 +35,7 @@ def checkout(request):
         profile = get_object_or_404(UserProfile, user=request.user)
         user_profile = profile
 
-        # Test to avoid crashing
+        # Test if the user profile isn't null
         if profile:
             # Populates the form data with the user's
             form_data = {
@@ -94,6 +97,7 @@ def checkout(request):
         messages.error(request, 'You must be logged in to submit requests.')
         return redirect(reverse('bag'))
 
+    # Creates a stripe intent to pass to the javascript
     intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
@@ -109,6 +113,7 @@ def checkout(request):
     return render(request, template, context)
 
 
+# Function to handle orders on successful checkout
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
@@ -127,4 +132,5 @@ def checkout_success(request, order_number):
         'order': order,
     }
 
+    # Sends user to a success page
     return render(request, 'checkout/checkout_success.html', context)

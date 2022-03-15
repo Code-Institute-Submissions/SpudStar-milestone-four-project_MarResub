@@ -11,24 +11,22 @@
                 <div class="row">
                     <div class="col">
                         <hr>
-                        {% if category_name %}
+                        <!-- Gives a helpful message if no pokemon meet the search criteria -->
+                        {% if not products %}
+                            <h4 class="text-white my-4">Sorry, we couldn't find any pokemon that matched your search.</h4>
+                            <h4 class="text-white my-4">Please try again with different search criteria.</h4>    
+                        {% elif category_name %}
                             <h2 class="mb-1">All {{ category_name.friendly_name }} Type Pokemon</h2>
+                            <h5>Page {{ current_page }}/{{ max_pages }}</h5>
                         {% else %}
                             <h2 class="mb-1">All Pokemon</h2>
+                            <h5>Page {{ current_page }}/{{ max_pages }}</h5>
                         {% endif %}
-                        <h5>Page {{ current_page }}/{{ max_pages }}</h5>
                         <hr>
                     </div>
                 </div>
 
                 <div class="row">
-                    <!-- Gives a helpful message if no pokemon meet the search criteria -->
-                    {% if not products %}
-                        <div class="col">
-                            <h4 class="text-white my-4">Sorry, we couldn't find any pokemon that matched your search.</h4>
-                            <h4 class="text-white my-4">Please try again with different search criteria.</h4>
-                        </div>
-                    {% endif %}
                     <!-- Displays all the products filtered by the goods views.py category -->
                     {% for product in products %}
                         {% if forloop.counter <= max_entry and forloop.counter > min_entry %}
@@ -81,12 +79,12 @@
                                     {% if forloop.counter|divisibleby:2 %}
                                         <li class="list-inline-item m-0">
                                             <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_name.pk }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}">
-                                                <span class="page-style-even clickable">{{ forloop.counter }}</span>
+                                                <span class="page-style-odd clickable">{{ forloop.counter }}</span>
                                             </a>
                                         </li>
                                     {% else %}
                                         <li class="list-inline-item m-0">
-                                            <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_name.pk }}&page_no={{ forloop.counter }}">
+                                            <a class="link-remover page-style" href="{% url 'products' %}?category={{ category_name.pk }}&page_no={{ forloop.counter }}" aria-label="Go to page {{ forloop.counter }}">
                                                 <span class="page-style-even clickable">{{ forloop.counter }}</span>
                                             </a>
                                         </li>

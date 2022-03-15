@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 
-# Changes to URLs suggested by mentor
+# Changes to URLs suggested by mentor to reduce clutter
 urlpatterns = [
     path('', views.all_products, name='products'),
     path('detail/<int:product_id>/',

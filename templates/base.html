@@ -210,10 +210,13 @@
         </div>
     </header>
 
+    <!-- Holds the background image and all content on the page -->
     <div class = "nav-offset container-fluid text-center hero-container">
+      <!-- Checks if any messages needs to be posted -->
       {% if messages %}
         <div>
           <ul class="messages">
+            <!-- Sets the background of the message div based on message type -->
             {% for message in messages %}
               {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                 <li class="error-message">{{ message }}</li>
@@ -230,6 +233,7 @@
       {% endblock %}
     </div>
 
+    <!-- Simple footer with my copyright, no need for links as they are in the nav bar -->
     <footer id = "botnav" class="text-center pb-5 pt-2">
       <h5>Website made by <i class="fas fa-copyright"></i>Edward Stanley</h5>
     </footer>

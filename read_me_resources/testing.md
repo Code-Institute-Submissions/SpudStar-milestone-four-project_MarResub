@@ -72,6 +72,8 @@ I will be going through the project app by app stating what validation mechanism
 - The code checks the user's profile information to ensure it exists. If not then it is picked up by the order form check. This results in the user being returned to the checkout view.
 - The code has a try except to ensure that an invalid product retrieval doesn't result in a crash
 
+I have put proof of my stripe system making membership purchases in the read_me_resources folder labelled as stripe_proof.png
+
 ## The Bag App
 ### If the user adds a product to their bag, the product should get added and the user should be notified
 - The product does indeed get added successfully, the message system lets the user know that the pokemon has been added, and the product count in the nav bar increments to show this.

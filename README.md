@@ -74,6 +74,7 @@ I will be covering the features on an app by app basis
 - On a regular load iterates through all the pokemon in a database, displaying them all in a card like format with the name, picture, types, level, and the pokemon's owner
 - On a load specified by the category type buttons, filters the list to streamline the users experience to find what they want. In terms of pokemon, types is a very important factor which the users would want to search by.
 - On a load specified by the search bar, filter the list to any pokemon containing the submitted string, again this streamlines the experience for the user allowing them to get what they want quicker.
+- On a load where the criteria is too specific and no pokemon are returned, notifies the user that the search yielded no results
 - When a pokemon's image is clicked, it takes the user to a more detailed view of its stats, as well as presenting the user with the option to add the pokemon to their bag.
 - A page system limiting the amount of content on screen at any time increasing load times and removing clutter for the user
 - Ensures that the user cannot add the same pokemon twice by mistake, first by logic checking if the product is already in the bag, and second by replacing the add button with a more helpful continue shopping or submit requests choice.
@@ -104,7 +105,7 @@ They would only be able to delete and edit their own. This wasnt implemented due
 ## Code Validation
 
 ### HTML W3 Validation
-- Upon running the HTML through the validator, the only popup of note was a warning stating that using 'widht:100%' and 'height:auto' was not common for an Img variable, however due to time and a lack of importance I decided to leave it
+- Upon running the HTML through the validator, the only popup of note was a warning stating that using 'widht:100%' and 'height:auto' was not common for an Img variable throwing up a lot of errors, I removed this and let the image scale naturally instead
 
 ### CSS W3 Validation
 - This fixed an issue I initally had with my @media version of the main content holder, which was designed to increase the padding to avoid nav overlap on smaller screens. I had forgotten to put a measurement for the width identifier and after fixing that no problems occurred.
@@ -113,7 +114,7 @@ They would only be able to delete and edit their own. This wasnt implemented due
 - Despite to the majority of the code for this coming from Stripe, I ran the stripe_elements.js through the validator regardless. No errors to note came about
 
 ### Flake 8
-- I used Flake 8 to identify the vast majority of issues with the python code, There ended up being a lot purely due to python being very specific about indentation, line length, and whitespace.
+- I used Flake 8 to identify the vast majority of issues with the python code, There ended up being a lot purely due to python being very specific about indentation, line length, and whitespace. However the one part I was unable to fix were the long text string Allauth backends in settings.py as attempts to shorten the string resulted in the backends failing to work. This is a known error in my code.
 
 ### PEP8
 - I also used PEP8 to validate the python code to catch anything Flake8 missed.
@@ -238,7 +239,7 @@ I had two major security concerns in the project:
 
 Please note that for both of these cases:
 1) I created a new heroku app with new database link, a section of commits in my commit history was due to me attempting to delete the previous commits with the sensitive data using git rebase.
-2) I switched over to AWS making the Google Cloud irrelevent. The Google Cloud bucket that was leaked no longer exists. The file unfortunatley won't leave my repository but it poses no security threat.
+2) I switched over to AWS making the Google Cloud irrelevent. The Google Cloud bucket that was leaked no longer exists. The file has since been removed from the deployed git commit
 #
 ## Technologies used:
 ### Languages:
@@ -246,6 +247,7 @@ HTML - Used for the base website buildup and links
 CSS - Used for general stylings, mainly made use of the bootstrap classes to styalize my website
 Javascript - Used majorly for the stripe payments, added some user experience benefits through the 'onerror' code for images
 Python - The basis for all the app view logic and pathing, allowed for python logic in multiple areas, most notably the products page
+JQuery - Used to handle the filtering of pokemon
 
 ### Other key technologies:
 Django - The main framework for the project
@@ -276,7 +278,7 @@ The images for each pokemon type are gotten from [here.](https://brickbronze.fan
 
 The background image for the site was made by myself in Gimp Studio
 
-I should mention however that despite the source links all of the images are using assets from Nintendo's Pokemon.
+I should mention however that despite the source links provided, all of the images are using assets from Nintendo's Pokemon.
 #
 ## Acknowledgement
 
