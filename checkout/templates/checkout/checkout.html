@@ -13,7 +13,8 @@
                 <legend>Your Details</legend>
                 <p class="display-8">Name: {{ user_details }}</p>
                 <p class="display-8">Email: {{ user_details.default_email }}</p>
-                <p class="display-8">Trainer Code: {{ user_details.default_trainer_code }}</p>
+                <p class="display-8 mb-1">Trainer Code: {{ user_details.default_trainer_code }}</p>
+                <p class="display-10">If you wish to change your details please do so in your profile</p>
             </div>
             <!-- Fieldset holding the stripe card inputs -->
             <fieldset>
@@ -22,6 +23,7 @@
                 <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
             </fieldset>
             <div class="mt-4">
+                <p class="display-10">Note that by pressing submit you agree to pay the £4.99 subscription fee to use this service</p>
                 <!-- Button to finish the order -->
                 <button id='submit-button' class='btn btn-outline-light'>
                     <span>Finish</span>
