@@ -4,7 +4,7 @@
 <!-- Initially used Boutique Ado's HTML to allow me to test it worked, have since adapted it for my own project -->
 {% block content %}
     <div class="overlay"></div>
-    <div class="col-6 mt-3 mx-auto text-center">
+    <div class="col-12 col-md-6 mt-3 mx-auto text-center">
         <!-- The order form required for checkout, holds card details in different field set -->
         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
             {% csrf_token %}

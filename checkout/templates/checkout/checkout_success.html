@@ -18,9 +18,9 @@
                 <h2 class="mb-4">Thank You</h2>
                 <hr>
                 <!-- Lets the User know what key details they submitted -->
-                <p class="text-black">Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
-                <p class="text-black">The owner of the pokemon will also be sent an email with your trainer ID: <strong>{{ order.user_trainer_code }}</strong>.</p>
-                <p class="text-black">*Please note that this functionality is not yet implemented, however the website can send emails as shown by the allauth system*</p>
+                <p>Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+                <p>The owner of the pokemon will also be sent an email with your trainer ID: <strong>{{ order.user_trainer_code }}</strong>.</p>
+                <p>*Please note that this functionality is not yet implemented, however the website can send emails as shown by the allauth system*</p>
             </div>
         </div>
 
@@ -30,13 +30,13 @@
                 <div class="p-2 border bg-dark">
                     <div class="row">
                         <div class="col">
-                            <small class="text-muted">Total Requests:</small>
+                            <small class="text-dark">Total Requests:</small>
                         </div>
                     </div>
                     <!-- Holds the Order ID of the order -->
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <p class="mb-0 text-black font-weight-bold">Request Id</p>
+                            <p class="mb-0 font-weight-bold">Request Id</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
                             <p class="mb-0">{{ order.order_number }}</p>
@@ -45,7 +45,7 @@
                     <!-- Holds the date the order was made -->
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <p class="mb-0 text-black font-weight-bold">Request Date</p>
+                            <p class="mb-0 font-weight-bold">Request Date</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
                             <p class="mb-0">{{ order.date }}</p>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <small class="text-muted">Request Details:</small>
+                            <small class="text-dark">Request Details:</small>
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                     <!-- Holds user details -->
                     <div class="row">
                         <div class="col">
-                            <small class="text-muted">Your Details:</small>
+                            <small class="text-dark">Your Details:</small>
                         </div>
                     </div>
 
