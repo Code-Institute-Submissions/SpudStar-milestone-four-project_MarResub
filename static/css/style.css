@@ -72,9 +72,6 @@ tr{
     color:white;
 }
 
-/* CSS for checkout display */
-
-
 /* Classes repurposed from milestone 3 to display pokemon stat values */
 .card-container{
     border-radius: 3px;
@@ -123,3 +120,23 @@ a.page-style{
     border: solid rgb(196, 196, 196) 1px;
     background-color: #303030;
 }
+
+/* CSS for message display */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.success-message{
+    background-color: rgba(13, 83, 45, 0.486);
+}
+
+.error-message{
+    background-color: rgba(83, 13, 13, 0.486);
+}
+
+.default-message{
+    background-color: rgba(78, 78, 78, 0.486);
+}
+

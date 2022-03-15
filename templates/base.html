@@ -215,7 +215,13 @@
         <div>
           <ul class="messages">
             {% for message in messages %}
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <li class="error-message">{{ message }}</li>
+              {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <li class="success-message">{{ message }}</li>
+              {% else %}
+                <li class="default-message">{{ message }}</li>
+              {% endif %}
             {% endfor %}
           </ul>
         </div>
