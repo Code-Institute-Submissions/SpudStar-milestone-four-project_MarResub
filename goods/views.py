@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Info
+from .models import Info, Category
 from .forms import ProductForm
 import math
 
@@ -11,6 +11,7 @@ import math
 def all_products(request):
 
     products = Info.objects.all()
+    category_name = None
     query = None
     categories = None
     page = 1
@@ -22,6 +23,7 @@ def all_products(request):
             categories = request.GET['category']
             # Checks both types for the type requested
             queries = Q(type1=categories) | Q(type2=categories)
+            category_name = get_object_or_404(Category, pk=categories)
             try:
                 products = products.filter(queries)
             except ValueError:
@@ -51,7 +53,8 @@ def all_products(request):
         'min_entry': min_entry,
         'max_entry': max_entry,
         'max_pages': max_pages,
-        'category_no': categories,
+        'category_name': category_name,
+        'current_page': page,
     }
 
     return render(request, 'products/products.html', context)
