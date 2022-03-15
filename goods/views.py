@@ -37,58 +37,13 @@ def all_products(request):
                 products = Info.objects.all()
 
         # Checks if the search is by name
-<<<<<<< HEAD
-        if 'q' in request.GET and 'q' is not None:
-            query = request.GET['q']
-<<<<<<< HEAD
-            try:
-                queries = Q(name__icontains=query)
-                products = products.filter(queries)
-            except ValueError:
-                query = ""
-=======
-            if not isinstance(query, type(None)):
-                try:
-                    queries = Q(name__icontains=query)
-                    products = products.filter(queries)
-                except ValueError:
-                    query = None
->>>>>>> 4f87525 (Tester)
-=======
         if 'q' in request.GET:
-<<<<<<< HEAD
-            if 'category' in request.GET and 'category' > 0:
-                query = request.GET['q']
-            else:
-                query = request.GET['q']
-                if not isinstance(query, type(None)):
-                    try:
-                        queries = Q(name__icontains=query)
-                        products = products.filter(queries)
-                    except ValueError:
-                        query = ''
->>>>>>> 6ef9434 (TestTestTest)
-            
-=======
             query = request.GET['q']
-<<<<<<< HEAD
-            try:
-                chr(query)
-            except TypeError:
-                try:
-                    queries = Q(name__icontains=query)
-                    products = products.filter(queries)
-                except ValueError:
-                    query = ''
->>>>>>> db9f1d1 (another test)
-=======
             if not query:
                 return redirect(reverse('products'))
 
             queries = Q(name__icontains=query)
             products = products.filter(queries)
-            
->>>>>>> f88bd3a (Revert back to original search system)
 
         # Gets the page number requested
         if 'page_no' in request.GET:
