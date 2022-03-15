@@ -148,6 +148,9 @@ A huge frustration through this was when a migration and data was already loaded
 ### Images not showing on mobile IOS
 After finally getting the Google Cloud working, the hosting service I intially used for my static files, the images for all the links were no more. It turns out Google Cloud cannot display images on IOS devices without major changes to code. In the end I opted to use AWS which fixed the issue.
 
+### Breakdown of Tests
+Additional testing information can be found in testing.md, an additional file in read me resources.
+
 ## Testing User Stories
 
 ### The Owner -
@@ -233,14 +236,9 @@ I had two major security concerns in the project:
 1) Accidently commiting the Heroku database link whilst testing deployment
 2) Accidently forgetting to put credentials.json in .gitignore and revealling bucket information for Google Cloud
 
-<<<<<<< HEAD
-Please note that for both of these cases I 1) Created a new heroku app with new database link, 2) Created a new bucked and Json file and placed the file in the gitignore.
-The websites security is not under threat and I can prove so if requested, The main reason I mention this is that I am unsure how to remove the information from the commits (Hence why i made new ones) so please be aware that the database in the commits and the json file are not the ones used for deployment and static file holding.
-=======
 Please note that for both of these cases:
 1) I created a new heroku app with new database link, a section of commits in my commit history was due to me attempting to delete the previous commits with the sensitive data using git rebase.
 2) I switched over to AWS making the Google Cloud irrelevent. The Google Cloud bucket that was leaked no longer exists. The file unfortunatley won't leave my repository but it poses no security threat.
->>>>>>> 134543d (Removed width/height from img elements)
 #
 ## Technologies used:
 ### Languages:
@@ -283,6 +281,8 @@ I should mention however that despite the source links all of the images are usi
 ## Acknowledgement
 
 A huge thank you to the Student Care team, especially Kieron, whom without which this definitely wouldn't have been possible. It has been a nightmare of a month with illness and bereavement, and thankfully now I have a valid project to submit.
+
+Thank you to my mentor for going through my code ensuring it should pass the criteria, and going over the changes needed for the project with me.
 
 Also a thank you to the Tutors, who helped me figure out why the ListItemInline wasnt inline in the admin, and sort out the stripe errors coming from my subscription system due to lapses in logic.
 
