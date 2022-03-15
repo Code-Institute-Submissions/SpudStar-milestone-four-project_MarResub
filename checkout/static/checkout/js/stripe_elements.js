@@ -58,10 +58,12 @@ form.addEventListener('submit', function(ev) {
             card: card,
         }
     }).then(function(result) {
-        
-        if (result.paymentIntent.status === 'succeeded') {
-            form.submit();
-        } else {
+        try {
+            if (result.paymentIntent.status === 'succeeded') {
+                form.submit();
+            }
+        }
+        catch(err) {
             if (result.error) {
                 var errorDiv = document.getElementById('card-errors');
                 var html = `
@@ -72,8 +74,7 @@ form.addEventListener('submit', function(ev) {
                 $(errorDiv).html(html);
                 card.update({ 'disabled': false});
                 $('#submit-button').attr('disabled', false);
-                form.submit();
             }
-        }
+        }  
     });
 });
